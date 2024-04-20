@@ -20,9 +20,11 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
-  const storeLoginDetails = async (email: string) => {
+  const storeLoginDetails = async (email: string, name: string, id: string) => {
     try {
       await AsyncStorage.setItem('email', email);
+      await AsyncStorage.setItem('name', name);
+      await AsyncStorage.setItem('id', id);
     } catch (error) {
       console.log('Error storing login details: ', error);
     }
@@ -31,14 +33,24 @@ export const AuthProvider = ({ children }) => {
   const checkLoginStatus = async () => {
     console.log("checkLoginStatus running...");
     try {
-        const email = await AsyncStorage.getItem('email');
+        const email = await AsyncStorage.getItem('email') || '';
+        const name = await AsyncStorage.getItem('name') || '';
+        const id = await AsyncStorage.getItem('id') || '';
 
         if (email) {
-            await handleLogin(email);
+          await handleLoginShort(email, name, id);
         }
     } catch (error) {
         console.log('Error retrieving login details: ', error);
     }
+  }
+
+  const handleLoginShort = async (email: string, name: string, id: string) => {
+    setUser({
+      email,
+      name,
+      id
+    })
   }
 
 const handleLogin = async (email: string) => {
