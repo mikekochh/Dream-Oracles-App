@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { User } from '../types';
+import SplashScreen from 'react-native-splash-screen';
 
 import axios from 'axios';
 
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
         if (email) {
           await handleLoginShort(email, name, id);
         }
+        SplashScreen.hide();
     } catch (error) {
         console.log('Error retrieving login details: ', error);
     }
