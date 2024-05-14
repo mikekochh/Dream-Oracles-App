@@ -1,9 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-} from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -11,6 +7,7 @@ import JournalDream from './screens/JournalDream';
 import Login from './screens/Login';
 import DreamJournaled from './screens/DreamJournaled';
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
+import DismissKeyboard from './components/DismissKeyboard'; // Import DismissKeyboard component
 
 const Stack = createStackNavigator();
 
@@ -62,11 +59,12 @@ function RootNavigator() {
 }
 
 function App(): React.JSX.Element {
-
   return (
     <AuthProvider>
       <StatusBar barStyle="light-content" backgroundColor="#171717" />
-      <RootNavigator />
+      <DismissKeyboard>
+        <RootNavigator />
+      </DismissKeyboard>
     </AuthProvider>
   );
 }

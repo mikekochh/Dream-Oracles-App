@@ -27,6 +27,8 @@ const JournalDream = ({ navigation }) => {
             return;
         }
 
+        console.log("user: ", user);
+
         try {
             const resJournal = await axios.post('https://www.dreamoracles.co/api/dream/journal', 
             { 
@@ -63,7 +65,7 @@ const JournalDream = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <Text style={{ color: '#8E8E8E', textAlign: 'center', fontSize: 30, marginBottom: 10, fontWeight: '200' }}>Journal Dream Below</Text>
-                <View style={{ height: 400 }}>
+                <View style={{ height: 350 }}>
                     <TextInput
                         style={{
                             flex: 1,

@@ -38,6 +38,10 @@ export const AuthProvider = ({ children }) => {
         const name = await AsyncStorage.getItem('name') || '';
         const id = await AsyncStorage.getItem('id') || '';
 
+        console.log('email: ', email);
+        console.log('name', name);
+        console.log('id: ', id);
+
         if (email) {
           await handleLoginShort(email, name, id);
         }
@@ -93,7 +97,7 @@ const handleLogin = async (email: string) => {
                 name: resUserLogin.data.name,
                 id: resUserLogin.data.id
             })
-            storeLoginDetails(resUserLogin.data.email);
+            storeLoginDetails(resUserLogin.data.email, resUserLogin.data.name, resUserLogin.data.id);
             setLoading(false);
         }
         else {
