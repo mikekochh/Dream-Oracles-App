@@ -12,6 +12,7 @@ export interface AuthContextType {
   handleLogin: (email: string) => Promise<void>;
   handleLogout: () => void;
   checkLoginStatus: () => Promise<void>;
+  handleCreateAccount: (email: string, name: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -105,7 +106,7 @@ const handleLogin = async (email: string) => {
             setLoading(false);
         }
 
-    } catch (err: unknown) {
+    } catch (err: any) {
         console.log("error: ", err.response.status);
         if (err.response.status == 401) {
             console.log("message: ", err.response.data.message);
@@ -126,65 +127,81 @@ const handleLogout = async () => {
     }
 }
 
-//   const handleCreateAccount = async (username: string, password: string, email: string, navigation: any) => {
+  const handleCreateAccount = async (email: string, name: string) => {
 
-//     setLoading(true);
+    setLoading(true);
+    setError('')
 
-//     const checkUsername = await fetch(API_BASE_URL + API_USERS_ENDPOINT + "/username/" + username)
-//     const jsonUsername = await checkUsername.json();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-//     if (jsonUsername.username) {
-//       Alert.alert('An account with this username already exists');
-//       setLoading(false);
-//       return;
-//     }
+    if (!email) {
+        setError("Please enter an email address");
+        setLoading(false);
+        return;
+    }
+    else if (!emailPattern.test(email)) {
+        setError("Please enter a valid email address");
+        setLoading(false);
+        return;
+    }
 
-//     const checkEmail = await fetch(API_BASE_URL + API_USERS_ENDPOINT + "/email/" + email)
-//     const jsonEmail = await checkEmail.json();
+    try {
+      const emailLower = email.toLowerCase();
+      // first check if this user already exists
+      const res = await fetch(`https://www.dreamoracles.co/api/user/${emailLower}`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+          },
+      });
 
-//     if (jsonEmail.email) {
-//       Alert.alert('An account with this email address already exists');
-//       setLoading(false);
-//       return;
-//     }
+      if (res.ok) {
+          setError("User already exists!");
+          setLoading(false);
+          return;
+      }
 
-//     if (username.trim() === '') {
-//       Alert.alert('Please enter a valid username');
-//       setLoading(false);
-//       return;
-//     }
-//     if (email.trim() === '') {
-//       Alert.alert('Please enter a valid email');
-//       setLoading(false);
-//       return;
-//     }
-//     if (password.trim() === '') {
-//       Alert.alert('Please enter a valid password');
-//       setLoading(false);
-//       return;
-//     }
+      const resNewUser = await fetch('https://www.dreamoracles.co/api/register', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              name,
+              email: emailLower,
+              password: 'password'
+          }),
+      });
 
-//     const response = await fetch(API_BASE_URL + API_USERS_ENDPOINT, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//           username: username,
-//           email: email,
-//           password: password,
-//       }),
-//     });
+      if (resNewUser.ok) {
+        const resUserLogin = await axios.post('https://www.dreamoracles.co/api/login/app', {
+            email: emailLower,
+            password: 'password'
+        })
 
-//     if (response.ok) {
-//       handleLogin(username, password, navigation);
-//     } else {
-//       const errorData = await response.json();
-//       Alert.alert('Account creation failed', errorData.message);
-//     }
-
-//     setLoading(false);
-//   };
+        if (resUserLogin.status === 200) {
+            setUser({
+                email: resUserLogin.data.email,
+                name: resUserLogin.data.name,
+                id: resUserLogin.data.id
+            })
+            storeLoginDetails(resUserLogin.data.email, resUserLogin.data.name, resUserLogin.data.id);
+            setLoading(false);
+        }
+        else {
+            console.log("Log in not successful");
+            setLoading(false);
+        }
+      }
+    } catch (err: any) {
+      console.log("error: ", err.response.status);
+      if (err.response.status == 401) {
+        console.log("message: ", err.response.data.message);
+        setError(err.response.data.message);
+      }
+      setLoading(false);
+    }
+  };
 
   return (
     <AuthContext.Provider value={{ 
@@ -193,7 +210,8 @@ const handleLogout = async () => {
       handleLogin, 
       handleLogout,
       error,
-      checkLoginStatus
+      checkLoginStatus,
+      handleCreateAccount
     }}>
       {children}
     </AuthContext.Provider>
