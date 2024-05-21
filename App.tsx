@@ -1,31 +1,42 @@
 import React, { useContext, useEffect } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import JournalDream from './screens/JournalDream';
 import Login from './screens/Login';
 import DreamJournaled from './screens/DreamJournaled';
+import ViewDream from './screens/ViewDream';
+import ViewJournal from './screens/ViewJournal';
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
 import DismissKeyboard from './components/DismissKeyboard'; // Import DismissKeyboard component
+import ShootingStar from './components/ShootingStar'; // Import ShootingStar component
 
 const Stack = createStackNavigator();
 
 function AuthStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: '#000020' }, // Ensure screens are transparent
+      }}
+    >
       <Stack.Screen
         name="Login"
         component={Login}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 function AppStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: '#000020' }, // Ensure screens are transparent
+      }}
+    >
       <Stack.Screen
         name="JournalDream"
         component={JournalDream}
@@ -36,14 +47,21 @@ function AppStack() {
         component={DreamJournaled}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="ViewJournal"
+        component={ViewJournal}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ViewDream"
+        component={ViewDream}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
-  )
+  );
 }
 
-
-
 function RootNavigator() {
-
   const { user, checkLoginStatus } = useContext(AuthContext) ?? {};
 
   useEffect(() => {
@@ -54,8 +72,7 @@ function RootNavigator() {
     <NavigationContainer>
       {user ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
-  )
-
+  );
 }
 
 function App(): React.JSX.Element {
@@ -63,10 +80,20 @@ function App(): React.JSX.Element {
     <AuthProvider>
       <StatusBar barStyle="light-content" backgroundColor="#171717" />
       <DismissKeyboard>
-        <RootNavigator />
+        <View style={styles.container}>
+          <RootNavigator />
+          {/* <ShootingStar /> */}
+        </View>
       </DismissKeyboard>
     </AuthProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000020', // Set your desired background color here
+  },
+});
 
 export default App;

@@ -35,8 +35,8 @@ const Login = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
-            <View style={{ flex: 1, backgroundColor: '#171717' }}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
                 {/* Logo at the top */}
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
                     <Image
@@ -62,7 +62,8 @@ const Login = () => {
                                     textAlignVertical: 'top',
                                     fontSize: 20,
                                     fontWeight: '200',
-                                    marginBottom: 10
+                                    marginBottom: 10,
+                                    backgroundColor: "#000000"
                                 }}
                                 placeholder='Enter name'
                                 placeholderTextColor={'#9E8E8E'}
@@ -81,7 +82,8 @@ const Login = () => {
                                 textAlignVertical: 'top',
                                 fontSize: 20,
                                 fontWeight: '200',
-                                marginBottom: 10
+                                marginBottom: 10,
+                                backgroundColor: "#000000"
                             }}
                             placeholder='Enter email'
                             placeholderTextColor={'#9E8E8E'}

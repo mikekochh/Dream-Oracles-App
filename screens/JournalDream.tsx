@@ -52,11 +52,22 @@ const JournalDream = ({ navigation }) => {
             setSaving(false);
         }
     }
+
+    const handleViewJournal = () => {
+        navigation.navigate("ViewJournal");
+    };
+    
     
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
-            <View style={{ backgroundColor: '#171717' }}>
-                <View style={{ alignItems: 'flex-end'}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000020' }}>
+            <View style={{ backgroundColor: '#000020' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TouchableOpacity
+                        style={styles.buttonStyleViewJournal}
+                        onPress={handleViewJournal}
+                    >
+                        <Text style={styles.buttonTextStyle}>View Journal</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttonStyleLogout}
                         onPress={handleLogout}
@@ -73,10 +84,11 @@ const JournalDream = ({ navigation }) => {
                             borderColor: '#626262',
                             borderRadius: 8,
                             padding: 10,
-                            color: '#8E8E8E', 
+                            color: '#8E8E8E',
                             textAlignVertical: 'top',
                             fontSize: 24,
                             fontWeight: '200',
+                            backgroundColor: '#000000'
                         }}
                         multiline
                         placeholder='Enter Dream'
@@ -100,6 +112,7 @@ const JournalDream = ({ navigation }) => {
                 </View>
             </View>
         </SafeAreaView>
+
     )
 }
 
@@ -125,8 +138,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         borderRadius: 4,
         margin: 10,
-    }
+    },
+    buttonStyleViewJournal: {
+        backgroundColor: '#636363',
+        paddingVertical: 3,
+        paddingHorizontal: 5,
+        borderRadius: 4,
+        margin: 10,
+    },
   });
-
-//   CC5500
-// 4B0000 (this is a good shade for if there is nothing inputted yet, indicate that they cannot select yet)

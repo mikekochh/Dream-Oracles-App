@@ -10,7 +10,7 @@ import {
 const DreamJournaled = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
+        <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: '#8E8E8E', textAlign: 'center', fontSize: 24, marginBottom: 10, fontWeight: '200' }}>Dream Has Been Journaled</Text>
                 <TouchableOpacity
