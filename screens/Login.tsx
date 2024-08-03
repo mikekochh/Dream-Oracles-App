@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  Image
+  Image,
+  ImageBackground
 } from 'react-native';
 import { AuthContext } from '../components/context/AuthProvider';
 import { useNavigation } from '@react-navigation/native';
@@ -35,6 +36,11 @@ const Login = () => {
     }
 
     return (
+    <ImageBackground
+        source={require('../assets/images/BackgroundStarsCropped.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+    >
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
                 {/* Logo at the top */}
@@ -116,6 +122,7 @@ const Login = () => {
                 </View>
             </View>
         </SafeAreaView>
+    </ImageBackground>
     );
 }
 
@@ -124,7 +131,7 @@ export default Login;
 
 const styles = StyleSheet.create({
     buttonStyle: {
-        backgroundColor: '#535353',
+        backgroundColor: '#00FFFF',
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 8,
@@ -136,4 +143,8 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
     },
+    backgroundImage: {
+      flex: 1,
+      justifyContent: 'center',
+    }
   });

@@ -16,13 +16,37 @@ const ViewJournal = ({ navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
   const [dreams, setDreams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [weekOffset, setWeekOffset] = useState(0);
+  const [firstDayOfWeek, setFirstDayOfWeek] = useState<Date | null>(null);
+  const [lastDayOfWeek, setLastDayOfWeek] = useState<Date | null>(null);
 
   useEffect(() => {
     const retrieveJournaledDreams = async () => {
       try {
         console.log("user: ", user);
+
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // Sunday - 0, Monday - 1, etc.
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - dayOfWeek + (weekOffset * 7));
+        startOfWeek.setHours(0, 0, 0, 0);
+        setFirstDayOfWeek(startOfWeek);
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 7);
+        setLastDayOfWeek(endOfWeek);
+
         const resJournalEntries = await axios.get('https://www.dreamoracles.co/api/dream/user/' + user?.email);
-        setDreams(resJournalEntries.data);
+        
+        const filteredDreams = resJournalEntries.data.filter(dream => {
+          const dreamDate = new Date(dream.dreamDate);
+          return dreamDate >= startOfWeek && dreamDate < endOfWeek;
+        });
+
+        const sortedDreams = filteredDreams.sort((a, b) => {
+          return new Date(b.dreamDate).getTime() - new Date(a.dreamDate).getTime();
+        });
+      
+        setDreams(sortedDreams);
       } catch (err) {
         console.log("Error: ", err);
       } finally {
@@ -85,6 +109,13 @@ const ViewJournal = ({ navigation }) => {
           <Text style={styles.buttonTextStyle}>Back</Text>
         </TouchableOpacity>
         <Text style={styles.title}>{user?.name}'s Dream Journal</Text>
+        <View>
+          <Text style={styles.dates}>
+            {firstDayOfWeek && lastDayOfWeek 
+              ? `${firstDayOfWeek.toLocaleDateString()} - ${lastDayOfWeek.toLocaleDateString()}` 
+              : 'Loading...'}
+          </Text>
+        </View>
       </View>
       <FlatList
         data={dreams}
@@ -130,11 +161,12 @@ const styles = StyleSheet.create({
     animationDelay: '0.4s',
   },
   buttonStyleViewJournal: {
-    backgroundColor: '#636363',
+    backgroundColor: '#00FFFF',
     paddingVertical: 3,
     paddingHorizontal: 5,
     borderRadius: 4,
     marginLeft: 10,
+    marginTop: 10,
     alignSelf: 'flex-start',
   },
   buttonTextStyle: {
@@ -145,10 +177,15 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
+  },
+  dates: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20
   },
   dreamList: {
     padding: 10,
