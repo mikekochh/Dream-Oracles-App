@@ -55,7 +55,7 @@ const ViewJournal = ({ navigation }) => {
     };
 
     retrieveJournaledDreams();
-  }, [user]);
+  }, [user, weekOffset]);
 
   const handleBackButton = () => {
     navigation.navigate("JournalDream");
@@ -109,12 +109,18 @@ const ViewJournal = ({ navigation }) => {
           <Text style={styles.buttonTextStyle}>Back</Text>
         </TouchableOpacity>
         <Text style={styles.title}>{user?.name}'s Dream Journal</Text>
-        <View>
+        <View style={styles.dateNavigationContainer}>
+          <TouchableOpacity onPress={() => setWeekOffset(weekOffset - 1)}>
+            <Image source={require('../assets/images/arrowLeft.png')} style={styles.arrowIcon} />
+          </TouchableOpacity>
           <Text style={styles.dates}>
             {firstDayOfWeek && lastDayOfWeek 
               ? `${firstDayOfWeek.toLocaleDateString()} - ${lastDayOfWeek.toLocaleDateString()}` 
               : 'Loading...'}
           </Text>
+          <TouchableOpacity onPress={() => setWeekOffset(weekOffset + 1)}>
+            <Image source={require('../assets/images/arrowRight.png')} style={styles.arrowIcon} />
+          </TouchableOpacity>
         </View>
       </View>
       <FlatList
@@ -182,10 +188,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
   },
+  dateNavigationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
   dates: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 20,
+    marginHorizontal: 10,
   },
   dreamList: {
     padding: 10,
@@ -219,5 +232,10 @@ const styles = StyleSheet.create({
   trashImage: {
     width: 20,
     height: 20,
+  },
+  arrowIcon: {
+    width: 24,
+    height: 24,
+    tintColor: 'white',
   },
 });

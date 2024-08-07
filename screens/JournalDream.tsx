@@ -59,17 +59,6 @@ const JournalDream = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require('../assets/images/BackgroundStarsCropped.png')}
-      style={styles.backgroundImage}
-      resizeMode="cover"
-    >
-      {/* <LinearGradient
-        colors={['#000000', '#090946', '#333399']}
-        style={styles.gradient}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-      > */}
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ backgroundColor: 'transparent' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -161,18 +150,12 @@ const JournalDream = ({ navigation }) => {
             </View>
           </View>
         </SafeAreaView>
-      {/* </LinearGradient> */}
-    </ImageBackground>
   );
 };
 
 export default JournalDream;
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center', // Center content vertically
-  },
   gradient: {
     ...StyleSheet.absoluteFillObject, // Fills the entire screen
     justifyContent: 'center',

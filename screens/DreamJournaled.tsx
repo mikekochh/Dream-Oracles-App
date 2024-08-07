@@ -28,7 +28,7 @@ export default DreamJournaled;
 
 const styles = StyleSheet.create({
     buttonStyle: {
-        backgroundColor: '#535353',
+        backgroundColor: '#00FFFF',
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 8,

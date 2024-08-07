@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { StatusBar, View, StyleSheet } from 'react-native';
+import { StatusBar, View, StyleSheet, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -70,7 +70,13 @@ function RootNavigator() {
 
   return (
     <NavigationContainer>
+      <ImageBackground
+        source={require('./assets/images/BackgroundStarsCropped.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      >
       {user ? <AppStack /> : <AuthStack />}
+      </ImageBackground>
     </NavigationContainer>
   );
 }
@@ -81,8 +87,7 @@ function App(): React.JSX.Element {
       <StatusBar barStyle="light-content" backgroundColor="#171717" />
       <DismissKeyboard>
         <View style={styles.container}>
-          <RootNavigator />
-          {/* <ShootingStar /> */}
+            <RootNavigator />
         </View>
       </DismissKeyboard>
     </AuthProvider>
@@ -93,6 +98,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000020', // Set your desired background color here
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center', // Center content vertically
   },
 });
 
