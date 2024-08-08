@@ -9,8 +9,7 @@ import DreamJournaled from './screens/DreamJournaled';
 import ViewDream from './screens/ViewDream';
 import ViewJournal from './screens/ViewJournal';
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
-import DismissKeyboard from './components/DismissKeyboard'; // Import DismissKeyboard component
-import ShootingStar from './components/ShootingStar'; // Import ShootingStar component
+import DismissKeyboard from './components/DismissKeyboard';
 
 const Stack = createStackNavigator();
 
@@ -70,13 +69,7 @@ function RootNavigator() {
 
   return (
     <NavigationContainer>
-      <ImageBackground
-        source={require('./assets/images/BackgroundStarsCropped.png')}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      >
       {user ? <AppStack /> : <AuthStack />}
-      </ImageBackground>
     </NavigationContainer>
   );
 }
@@ -98,10 +91,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000020', // Set your desired background color here
-  },
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center', // Center content vertically
   },
 });
 

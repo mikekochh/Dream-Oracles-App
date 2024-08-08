@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
@@ -42,18 +43,24 @@ const ViewDream = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={handleBackButton}
-        >
-          <Text style={styles.buttonTextStyle}>Back</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{user?.name}'s Dream</Text>
-        <Text style={styles.dreamText}>{dream}</Text>
-      </ScrollView>
-    </SafeAreaView>
+    <ImageBackground
+      source={require('../assets/images/BackgroundStarsCropped.png')}
+      style={styles.backgroundImage}
+      resizeMode="cover"
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ padding: 0 }}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={handleBackButton}
+          >
+            <Text style={styles.buttonTextStyle}>Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>{user?.name}'s Dream</Text>
+          <Text style={styles.dreamText}>{dream}</Text>
+        </ScrollView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -78,13 +85,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 20,
+    padding: 20
   },
   buttonStyle: {
-    backgroundColor: '#636363',
+    backgroundColor: '#00FFFF',
     paddingVertical: 3,
     paddingHorizontal: 5,
     borderRadius: 4,
     marginLeft: 10,
+    marginTop: 10,
     alignSelf: 'flex-start',
   },
   buttonTextStyle: {
@@ -98,5 +107,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginTop: 50,
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

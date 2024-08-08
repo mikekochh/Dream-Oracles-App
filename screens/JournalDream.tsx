@@ -59,6 +59,11 @@ const JournalDream = ({ navigation }) => {
   };
 
   return (
+        <ImageBackground
+          source={require('../assets/images/BackgroundStarsCropped.png')}
+          style={styles.backgroundImage}
+          resizeMode="cover"
+        >
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ backgroundColor: 'transparent' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -150,6 +155,7 @@ const JournalDream = ({ navigation }) => {
             </View>
           </View>
         </SafeAreaView>
+      </ImageBackground>
   );
 };
 
@@ -160,6 +166,10 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject, // Fills the entire screen
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center', // Center content vertically
   },
   buttonStyle: {
     backgroundColor: '#00FFFF',

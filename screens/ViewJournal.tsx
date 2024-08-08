@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   FlatList,
   Image,
   Animated,
+  ImageBackground,
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
@@ -19,6 +20,11 @@ const ViewJournal = ({ navigation }) => {
   const [weekOffset, setWeekOffset] = useState(0);
   const [firstDayOfWeek, setFirstDayOfWeek] = useState<Date | null>(null);
   const [lastDayOfWeek, setLastDayOfWeek] = useState<Date | null>(null);
+
+  // Create animated values for each dot
+  const dot1Opacity = useRef(new Animated.Value(0)).current;
+  const dot2Opacity = useRef(new Animated.Value(0)).current;
+  const dot3Opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const retrieveJournaledDreams = async () => {
@@ -57,6 +63,39 @@ const ViewJournal = ({ navigation }) => {
     retrieveJournaledDreams();
   }, [user, weekOffset]);
 
+  // Animation logic
+  const startAnimation = () => {
+    const animateDot = (dot, delay) => {
+      return Animated.sequence([
+        Animated.delay(delay),
+        Animated.timing(dot, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(dot, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ]);
+    };
+
+    Animated.loop(
+      Animated.parallel([
+        animateDot(dot1Opacity, 0),
+        animateDot(dot2Opacity, 200),
+        animateDot(dot3Opacity, 400),
+      ])
+    ).start();
+  };
+
+  useEffect(() => {
+    if (loading) {
+      startAnimation();
+    }
+  }, [loading]);
+
   const handleBackButton = () => {
     navigation.navigate("JournalDream");
   };
@@ -88,18 +127,29 @@ const ViewJournal = ({ navigation }) => {
 
   if (loading) {
     return (
+      <ImageBackground
+          source={require('../assets/images/BackgroundStarsCropped.png')}
+          style={styles.backgroundImage}
+          resizeMode="cover"
+      >
       <SafeAreaView style={styles.loadingContainer}>
         <Text style={styles.loadingText}>Preparing Your Dream Journal</Text>
         <View style={styles.dotsContainer}>
-          <Animated.View style={[styles.dot, styles.delay200]} />
-          <Animated.View style={[styles.dot, styles.delay400]} />
-          <Animated.View style={styles.dot} />
+          <Animated.View style={[styles.dot, { opacity: dot1Opacity }]} />
+          <Animated.View style={[styles.dot, { opacity: dot2Opacity }]} />
+          <Animated.View style={[styles.dot, { opacity: dot3Opacity }]} />
         </View>
       </SafeAreaView>
+      </ImageBackground>
     );
   }
 
   return (
+    <ImageBackground
+        source={require('../assets/images/BackgroundStarsCropped.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+    >
     <SafeAreaView style={{ flex: 1 }}>
       <View>
         <TouchableOpacity
@@ -130,6 +180,7 @@ const ViewJournal = ({ navigation }) => {
         contentContainerStyle={styles.dreamList}
       />
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -158,13 +209,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#6B7280',
     borderRadius: 8,
     marginHorizontal: 4,
-    animation: 'pulse 1.5s infinite ease-in-out',
-  },
-  delay200: {
-    animationDelay: '0.2s',
-  },
-  delay400: {
-    animationDelay: '0.4s',
   },
   buttonStyleViewJournal: {
     backgroundColor: '#00FFFF',
@@ -237,5 +281,9 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     tintColor: 'white',
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

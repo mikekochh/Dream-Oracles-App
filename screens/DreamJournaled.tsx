@@ -4,12 +4,18 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
+  ImageBackground
 } from 'react-native';
 
 const DreamJournaled = ({ navigation }) => {
 
     return (
+    <ImageBackground
+        source={require('../assets/images/BackgroundStarsCropped.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+    >
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: '#8E8E8E', textAlign: 'center', fontSize: 24, marginBottom: 10, fontWeight: '200' }}>Dream Has Been Journaled</Text>
@@ -21,6 +27,7 @@ const DreamJournaled = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
+    </ImageBackground>
     )
 }
 
@@ -40,4 +47,8 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
     },
+    backgroundImage: {
+        flex: 1,
+        justifyContent: 'center', // Center content vertically
+      },
   });
