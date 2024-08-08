@@ -1,28 +1,41 @@
 // HomeScreen.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { globalStyles } from '../styles/globalStyles';
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to the Home Screen!</Text>
-      <Text style={styles.text}>Here you can find the latest updates and features.</Text>
-    </View>
+    <ImageBackground
+      source={require('../assets/images/BackgroundStarsCropped.png')}
+      style={globalStyles.backgroundImage}
+      resizeMode="cover"
+    >
+      <SafeAreaView style={styles.container}>
+        <Text style={globalStyles.pageTitle}>Dream Oracles</Text>
+        <View style={styles.contentContainer}>
+          <Text style={styles.text}>Welcome to Dream Oracles!</Text>
+          <Text style={styles.text}>Here you can find the latest updates and features.</Text>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 20,
+  },
+  contentContainer: {
+    marginTop: 20, // Space between the title and content
     alignItems: 'center',
-    backgroundColor: '#f8f8ff', // Light background color
   },
   text: {
     fontSize: 18,
-    color: '#333', // Dark text color
+    color: '#F0F0F0', // Light text color for contrast
     textAlign: 'center',
-    margin: 10,
+    marginVertical: 10,
   },
 });
 

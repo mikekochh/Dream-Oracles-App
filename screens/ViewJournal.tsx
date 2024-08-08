@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
+import { globalStyles } from '../styles/globalStyles';
 
 const ViewJournal = ({ navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
@@ -151,14 +152,7 @@ const ViewJournal = ({ navigation }) => {
         resizeMode="cover"
     >
     <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <TouchableOpacity
-          style={styles.buttonStyleViewJournal}
-          onPress={handleBackButton}
-        >
-          <Text style={styles.buttonTextStyle}>Back</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>{user?.name}'s Dream Journal</Text>
+        <Text style={globalStyles.pageTitle}>Dream Journal</Text>
         <View style={styles.dateNavigationContainer}>
           <TouchableOpacity onPress={() => setWeekOffset(weekOffset - 1)}>
             <Image source={require('../assets/images/arrowLeft.png')} style={styles.arrowIcon} />
@@ -172,7 +166,6 @@ const ViewJournal = ({ navigation }) => {
             <Image source={require('../assets/images/arrowRight.png')} style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
-      </View>
       <FlatList
         data={dreams}
         renderItem={renderDreamItem}

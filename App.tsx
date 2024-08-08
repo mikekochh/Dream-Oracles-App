@@ -11,18 +11,17 @@ import ViewDream from './screens/ViewDream';
 import ViewJournal from './screens/ViewJournal';
 import HomeScreen from './screens/Home';
 import Settings from './screens/Settings';
-
-import MeditationScreen from './screens/MeditationScreen'; // Import the MeditationScreen
+import SleepScreen from './screens/Sleep';
 
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
 import DismissKeyboard from './components/DismissKeyboard';
 
 // Import your icons
-import settingsLogo from './assets/images/trash-bin.png';
+import settingsLogo from './assets/images/settingsLogo.png';
 import homeLogo from './assets/images/homeLogo.png';
 import journalLogo from './assets/images/journalLogo.png';
 import writeLogo from './assets/images/writeLogo.png';
-import meditationLogo from './assets/images/meditationLogo.png';
+import sleepLogo from './assets/images/sleepLogo.png';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,7 +71,7 @@ function ViewJournalStack() {
       }}
     >
       <Stack.Screen
-        name="ViewJournal"
+        name="ViewJournalMain" // Use a unique name here
         component={ViewJournal}
         options={{ headerShown: false }}
       />
@@ -93,28 +92,47 @@ function AppTabs() {
           let iconSource;
           switch (route.name) {
             case 'Journal':
-              iconSource = journalLogo;
-              break;
-            case 'ViewJournal':
               iconSource = writeLogo;
+              break;
+            case 'ViewJournalTab': // Update this to match the new name
+              iconSource = journalLogo;
               break;
             case 'Home':
               iconSource = homeLogo;
               break;
-            case 'Meditation': // Updated from Filler to Meditation
-              iconSource = meditationLogo; // Use the meditation logo
+            case 'Sleep':
+              iconSource = sleepLogo;
               break;
             case 'Settings':
               iconSource = settingsLogo;
               break;
             default:
-              iconSource = homeLogo; // Fallback icon
+              iconSource = homeLogo;
           }
-          return <Image source={iconSource} style={styles.icon} />;
+          return (
+            <View
+              style={[
+                styles.iconContainer,
+                { backgroundColor: focused ? '#666699' : 'transparent' },
+              ]}
+            >
+              <Image
+                source={iconSource}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? 'white' : 'lightgray' },
+                ]}
+              />
+            </View>
+          );
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
-        headerShown: false, // Hide the header for tabs
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: '#333355',
+        },
+        headerShown: false,
       })}
     >
       <Tab.Screen
@@ -123,7 +141,7 @@ function AppTabs() {
         options={{ title: 'Journal New Dream' }}
       />
       <Tab.Screen
-        name="ViewJournal"
+        name="ViewJournalTab" // Use a different name here
         component={ViewJournalStack}
         options={{ title: 'View Dream Journal' }}
       />
@@ -133,9 +151,9 @@ function AppTabs() {
         options={{ title: 'Home Page' }}
       />
       <Tab.Screen
-        name="Meditation" // Updated tab name
-        component={MeditationScreen} // Use the MeditationScreen component
-        options={{ title: 'Meditation' }}
+        name="Sleep"
+        component={SleepScreen}
+        options={{ title: 'Sleep' }}
       />
       <Tab.Screen
         name="Settings"
@@ -145,6 +163,7 @@ function AppTabs() {
     </Tab.Navigator>
   );
 }
+
 
 function RootNavigator() {
   const { user, checkLoginStatus } = useContext(AuthContext) ?? {};
@@ -182,6 +201,13 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     resizeMode: 'contain',
+  },
+  iconContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 5, // Add some margin between icons
+    padding: 24, // Add padding for a consistent touch area
   },
 });
 

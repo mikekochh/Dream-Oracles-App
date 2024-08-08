@@ -9,8 +9,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import axios from 'axios';
-import { LinearGradient } from 'expo-linear-gradient';
 import { AuthContext } from '../components/context/AuthProvider';
+import { globalStyles } from '../styles/globalStyles';
 
 const JournalDream = ({ navigation }) => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
@@ -66,42 +66,7 @@ const JournalDream = ({ navigation }) => {
         >
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ backgroundColor: 'transparent' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TouchableOpacity
-                style={styles.buttonStyleAlt}
-                onPress={handleViewJournal}
-              >
-                <Text style={styles.buttonTextStyleAlt}>View Journal</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.buttonStyleAlt}
-                onPress={handleLogout}
-              >
-                <Text style={styles.buttonTextStyleAlt}>Logout</Text>
-              </TouchableOpacity>
-            </View>
-            <Text
-              style={{
-                color: 'white',
-                textAlign: 'center',
-                fontSize: 52,
-                marginBottom: 10,
-                fontWeight: '200',
-              }}
-            >
-              Dream Oracles
-            </Text>
-            <Text
-              style={{
-                color: '#8E8E8E',
-                textAlign: 'center',
-                fontSize: 32,
-                marginBottom: 10,
-                fontWeight: '200',
-              }}
-            >
-              Journal Dream Below
-            </Text>
+            <Text style={[globalStyles.pageTitle]}>Dream Entry</Text>
             <View style={{ height: 350 }}>
               <TextInput
                 style={{
@@ -117,7 +82,7 @@ const JournalDream = ({ navigation }) => {
                   backgroundColor: '#000000',
                 }}
                 multiline
-                placeholder="Enter Dream"
+                placeholder="Journal Dream Here"
                 placeholderTextColor={'#9E8E8E'}
                 value={dream}
                 onChangeText={setDream}
