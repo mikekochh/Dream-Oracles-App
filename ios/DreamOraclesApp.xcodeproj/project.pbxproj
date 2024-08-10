@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DreamOraclesAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DreamOraclesAppTests.m */; };
+		01D0518DCACD48F3915BF249 /* ComfortaaRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-DreamOraclesApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-DreamOraclesApp.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-DreamOraclesApp-DreamOraclesAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-DreamOraclesApp-DreamOraclesAppTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		ECF8C782BEC44CB5A57B1029 /* GrandifloraOneRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */; };
-		BD6A5B0CCAAE4370B7EBE7E4 /* ComfortaaBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */; };
 		7AB2A548FB8742F2BA899C8B /* ComfortaaLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D31A163C83584223BBA80657 /* ComfortaaLight.ttf */; };
-		F8CE0F45865448EE9DAB069C /* ComfortaaMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */; };
-		01D0518DCACD48F3915BF249 /* ComfortaaRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		BD6A5B0CCAAE4370B7EBE7E4 /* ComfortaaBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */; };
 		C5A1ECA5100543FF998D102E /* ComfortaaSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EEFB08ADD572495C99A59896 /* ComfortaaSemiBold.ttf */; };
+		ECF8C782BEC44CB5A57B1029 /* GrandifloraOneRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */; };
+		F8CE0F45865448EE9DAB069C /* ComfortaaMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,18 +44,18 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DreamOraclesApp/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-DreamOraclesApp-DreamOraclesAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DreamOraclesApp-DreamOraclesAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-DreamOraclesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamOraclesApp.debug.xcconfig"; path = "Target Support Files/Pods-DreamOraclesApp/Pods-DreamOraclesApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComfortaaMedium.ttf; path = ../assets/fonts/ComfortaaMedium.ttf; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-DreamOraclesApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamOraclesApp.release.xcconfig"; path = "Target Support Files/Pods-DreamOraclesApp/Pods-DreamOraclesApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-DreamOraclesApp-DreamOraclesAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamOraclesApp-DreamOraclesAppTests.debug.xcconfig"; path = "Target Support Files/Pods-DreamOraclesApp-DreamOraclesAppTests/Pods-DreamOraclesApp-DreamOraclesAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-DreamOraclesApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DreamOraclesApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComfortaaRegular.ttf; path = ../assets/fonts/ComfortaaRegular.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DreamOraclesApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-DreamOraclesApp-DreamOraclesAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DreamOraclesApp-DreamOraclesAppTests.release.xcconfig"; path = "Target Support Files/Pods-DreamOraclesApp-DreamOraclesAppTests/Pods-DreamOraclesApp-DreamOraclesAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComfortaaBold.ttf; path = ../assets/fonts/ComfortaaBold.ttf; sourceTree = "<group>"; };
+		B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GrandifloraOneRegular.ttf; path = ../assets/fonts/GrandifloraOneRegular.ttf; sourceTree = "<group>"; };
+		D31A163C83584223BBA80657 /* ComfortaaLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComfortaaLight.ttf; path = ../assets/fonts/ComfortaaLight.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */ = {isa = PBXFileReference; name = "GrandifloraOneRegular.ttf"; path = "../assets/fonts/GrandifloraOneRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */ = {isa = PBXFileReference; name = "ComfortaaBold.ttf"; path = "../assets/fonts/ComfortaaBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D31A163C83584223BBA80657 /* ComfortaaLight.ttf */ = {isa = PBXFileReference; name = "ComfortaaLight.ttf"; path = "../assets/fonts/ComfortaaLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */ = {isa = PBXFileReference; name = "ComfortaaMedium.ttf"; path = "../assets/fonts/ComfortaaMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */ = {isa = PBXFileReference; name = "ComfortaaRegular.ttf"; path = "../assets/fonts/ComfortaaRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EEFB08ADD572495C99A59896 /* ComfortaaSemiBold.ttf */ = {isa = PBXFileReference; name = "ComfortaaSemiBold.ttf"; path = "../assets/fonts/ComfortaaSemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EEFB08ADD572495C99A59896 /* ComfortaaSemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ComfortaaSemiBold.ttf; path = ../assets/fonts/ComfortaaSemiBold.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +106,20 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = DreamOraclesApp;
+			sourceTree = "<group>";
+		};
+		23C734E370CD40F7A6EED172 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */,
+				8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */,
+				D31A163C83584223BBA80657 /* ComfortaaLight.ttf */,
+				4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */,
+				770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */,
+				EEFB08ADD572495C99A59896 /* ComfortaaSemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -160,20 +174,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		23C734E370CD40F7A6EED172 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				B087E5EDBE3D444F84F2F933 /* GrandifloraOneRegular.ttf */,
-				8A3A8E1439E74B9295D0E23E /* ComfortaaBold.ttf */,
-				D31A163C83584223BBA80657 /* ComfortaaLight.ttf */,
-				4E78824FEE8A4A9DA960257E /* ComfortaaMedium.ttf */,
-				770B23E180E74BDBA1BDE392 /* ComfortaaRegular.ttf */,
-				EEFB08ADD572495C99A59896 /* ComfortaaSemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
