@@ -9,10 +9,12 @@ export interface AuthContextType {
   user: User | null;
   loading: boolean;
   error: string;
+  dreamStreak: number;
   handleLogin: (email: string) => Promise<void>;
   handleLogout: () => void;
   checkLoginStatus: () => Promise<void>;
   handleCreateAccount: (email: string, name: string) => Promise<void>;
+  getDreamStreak: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
+  const [dreamStreak, setDreamStreak] = useState<number>(0);
 
   const storeLoginDetails = async (email: string, name: string, id: string) => {
     try {
@@ -59,6 +62,15 @@ export const AuthProvider = ({ children }) => {
       id
     })
   }
+
+const getDreamStreak = async () => {
+  console.log("getDreamStreak running...");
+
+  const resUserDreamStreak = await axios.get('https://www.dreamoracles.co/api/dream/streak/', {
+    params: { userID: user?.id}
+  });
+  setDreamStreak(resUserDreamStreak.data.dreamStreak[0].streakLength);
+}
 
 const handleLogin = async (email: string) => {
     setLoading(true);
@@ -207,11 +219,13 @@ const handleLogout = async () => {
     <AuthContext.Provider value={{ 
       user, 
       loading, 
+      error,
+      dreamStreak,
       handleLogin, 
       handleLogout,
-      error,
       checkLoginStatus,
-      handleCreateAccount
+      handleCreateAccount,
+      getDreamStreak,
     }}>
       {children}
     </AuthContext.Provider>

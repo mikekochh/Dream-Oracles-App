@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
-  Text,
   TextInput,
   View,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import { AuthContext } from '../components/context/AuthProvider';
 import { useNavigation } from '@react-navigation/native';
+import Text from '../components/Text';
 
 const Login = () => {
 

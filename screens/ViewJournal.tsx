@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   SafeAreaView,
@@ -13,6 +12,7 @@ import {
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
+import Text from '../components/Text';
 
 const ViewJournal = ({ navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
@@ -133,12 +133,12 @@ const ViewJournal = ({ navigation }) => {
           style={styles.backgroundImage}
           resizeMode="cover"
       >
-      <SafeAreaView style={styles.loadingContainer}>
+      <SafeAreaView style={globalStyles.loadingContainer}>
         <Text style={styles.loadingText}>Preparing Your Dream Journal</Text>
-        <View style={styles.dotsContainer}>
-          <Animated.View style={[styles.dot, { opacity: dot1Opacity }]} />
-          <Animated.View style={[styles.dot, { opacity: dot2Opacity }]} />
-          <Animated.View style={[styles.dot, { opacity: dot3Opacity }]} />
+        <View style={globalStyles.dotsContainer}>
+          <Animated.View style={[globalStyles.dot, { opacity: dot1Opacity }]} />
+          <Animated.View style={[globalStyles.dot, { opacity: dot2Opacity }]} />
+          <Animated.View style={[globalStyles.dot, { opacity: dot3Opacity }]} />
         </View>
       </SafeAreaView>
       </ImageBackground>
@@ -152,7 +152,7 @@ const ViewJournal = ({ navigation }) => {
         resizeMode="cover"
     >
     <SafeAreaView style={{ flex: 1 }}>
-        <Text style={globalStyles.pageTitle}>Dream Journal</Text>
+        <Text style={globalStyles.pageSmallTitle}>Dream Journal</Text>
         <View style={styles.dateNavigationContainer}>
           <TouchableOpacity onPress={() => setWeekOffset(weekOffset - 1)}>
             <Image source={require('../assets/images/arrowLeft.png')} style={styles.arrowIcon} />
@@ -180,28 +180,10 @@ const ViewJournal = ({ navigation }) => {
 export default ViewJournal;
 
 const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000020',
-  },
   loadingText: {
     color: 'white',
     fontSize: 24,
     marginBottom: 20,
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dot: {
-    width: 16,
-    height: 16,
-    backgroundColor: '#6B7280',
-    borderRadius: 8,
-    marginHorizontal: 4,
   },
   buttonStyleViewJournal: {
     backgroundColor: '#00FFFF',

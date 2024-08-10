@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { 
-  View, 
-  Text, 
+  View,
   StyleSheet, 
   ImageBackground, 
   TouchableOpacity 
@@ -10,6 +9,7 @@ import { globalStyles } from '../styles/globalStyles';
 
 import { AuthContext } from '../components/context/AuthProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Text from '../components/Text';
 
 const Settings = () => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
@@ -21,7 +21,7 @@ const Settings = () => {
       resizeMode="cover"
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <Text style={[globalStyles.pageTitle, globalStyles.goldenRatioThree]}>Settings</Text>
+        <Text style={globalStyles.pageSmallTitle}>Settings</Text>
         <View style={styles.contentContainer}>
           <View style={styles.section}>
             <Text style={[styles.sectionTitle, globalStyles.goldenRatioTwo]}>Profile Details</Text>

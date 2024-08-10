@@ -1,7 +1,8 @@
 // SleepScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
+import Text from '../components/Text';
 
 const SleepScreen = () => {
   return (
@@ -11,29 +12,37 @@ const SleepScreen = () => {
       resizeMode="cover"
     >
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 20, justifyContent: 'flex-start' }}>
-        <Text style={globalStyles.pageTitle}>Sleep Sounds</Text>
+        <Text style={globalStyles.pageSmallTitle}>Sleep Sounds</Text>
 
         {/* Meditation Button */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTitle}>Meditation</Text>
+        <TouchableOpacity style={globalStyles.wideButton}>
+          <Text style={globalStyles.wideButtonTitle}>Meditation</Text>
           <Text style={styles.buttonDescription}>
             Use our sleep meditation tool to prime your brain for sleep.
           </Text>
         </TouchableOpacity>
 
         {/* Breath Work Button */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTitle}>Breath Work</Text>
+        <TouchableOpacity style={globalStyles.wideButton}>
+          <Text style={globalStyles.wideButtonTitle}>Breath Work</Text>
           <Text style={styles.buttonDescription}>
             Do some breath work that emphasizes grounding, calmness, and promoting good sleep.
           </Text>
         </TouchableOpacity>
 
         {/* Frequencies Button */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTitle}>Frequencies</Text>
+        <TouchableOpacity style={globalStyles.wideButton}>
+          <Text style={globalStyles.wideButtonTitle}>Frequencies</Text>
           <Text style={styles.buttonDescription}>
             Play some sound wavelengths while you sleep to promote deeper sleep, uninterrupted sleep, or wavelengths that promote more vivid dreams.
+          </Text>
+        </TouchableOpacity>
+
+        {/* Bedtime Stories Button */}
+        <TouchableOpacity style={globalStyles.wideButton}>
+          <Text style={globalStyles.wideButtonTitle}>Bedtime Stories</Text>
+          <Text style={styles.buttonDescription}>
+          Tune out the brain chatter and revisit that relaxing childhood feeling of having a bed time story read to you before going to sleep. 
           </Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -42,25 +51,6 @@ const SleepScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    width: '100%',
-    backgroundColor: '#666699', // Lighter blue background for buttons
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 20,
-    alignItems: 'center',
-    shadowColor: '#000', // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 5, // Shadow for Android
-  },
-  buttonTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFFFFF', // White text color for contrast
-    marginBottom: 5,
-  },
   buttonDescription: {
     fontSize: 14,
     color: '#F0F0F0', // Lighter text color for contrast

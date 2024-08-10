@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,15 +6,21 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  ImageBackground
+  ImageBackground,
+  Animated
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
+import { globalStyles } from '../styles/globalStyles';
 
 const ViewDream = ({ route, navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
   const [dream, setDream] = useState(null);
   const { dreamID } = route.params;
+
+  const dot1Opacity = useRef(new Animated.Value(0)).current;
+  const dot2Opacity = useRef(new Animated.Value(0)).current;
+  const dot3Opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const fetchDream = async () => {
@@ -36,9 +42,20 @@ const ViewDream = ({ route, navigation }) => {
 
   if (!dream) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
-        <Text style={styles.loadingText}>Loading...</Text>
+      <ImageBackground
+          source={require('../assets/images/BackgroundStarsCropped.png')}
+          style={styles.backgroundImage}
+          resizeMode="cover"
+      >
+      <SafeAreaView style={globalStyles.loadingContainer}>
+        <Text style={styles.loadingText}>Preparing Your Dream Journal</Text>
+        <View style={globalStyles.dotsContainer}>
+          <Animated.View style={[globalStyles.dot, { opacity: dot1Opacity }]} />
+          <Animated.View style={[globalStyles.dot, { opacity: dot2Opacity }]} />
+          <Animated.View style={[globalStyles.dot, { opacity: dot3Opacity }]} />
+        </View>
       </SafeAreaView>
+      </ImageBackground>
     );
   }
 

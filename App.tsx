@@ -87,6 +87,7 @@ function ViewJournalStack() {
 function AppTabs() {
   return (
     <Tab.Navigator
+      initialRouteName="Home"  // Set the initial route to Home
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconSource;
@@ -163,7 +164,6 @@ function AppTabs() {
     </Tab.Navigator>
   );
 }
-
 
 function RootNavigator() {
   const { user, checkLoginStatus } = useContext(AuthContext) ?? {};

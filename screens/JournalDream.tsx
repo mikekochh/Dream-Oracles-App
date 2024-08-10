@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {
   StyleSheet,
-  Text,
   TextInput,
   View,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
+import Text from '../components/Text';
 
 const JournalDream = ({ navigation }) => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
@@ -66,8 +66,9 @@ const JournalDream = ({ navigation }) => {
         >
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ backgroundColor: 'transparent' }}>
-            <Text style={[globalStyles.pageTitle]}>Dream Entry</Text>
-            <View style={{ height: 350 }}>
+            <Text style={globalStyles.pageSmallTitle}>Dream Entry</Text>
+            <Text style={[globalStyles.pageText, { textAlign: 'center' } ]}>What was your dream about?</Text>
+            <View style={{ height: 350, padding: 20, paddingBottom: 0}}>
               <TextInput
                 style={{
                   flex: 1,
