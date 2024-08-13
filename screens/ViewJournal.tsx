@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -11,8 +11,10 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
+import { useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
+import Loading from '../components/Loading';
 
 const ViewJournal = ({ navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
@@ -27,42 +29,46 @@ const ViewJournal = ({ navigation }) => {
   const dot2Opacity = useRef(new Animated.Value(0)).current;
   const dot3Opacity = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    const retrieveJournaledDreams = async () => {
-      try {
-        console.log("user: ", user);
+  const retrieveJournaledDreams = async () => {
+    try {
+      const today = new Date();
+      const dayOfWeek = today.getDay(); // Sunday - 0, Monday - 1, etc.
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - dayOfWeek + (weekOffset * 7));
+      startOfWeek.setHours(0, 0, 0, 0);
+      setFirstDayOfWeek(startOfWeek);
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 7);
+      setLastDayOfWeek(endOfWeek);
 
-        const today = new Date();
-        const dayOfWeek = today.getDay(); // Sunday - 0, Monday - 1, etc.
-        const startOfWeek = new Date(today);
-        startOfWeek.setDate(today.getDate() - dayOfWeek + (weekOffset * 7));
-        startOfWeek.setHours(0, 0, 0, 0);
-        setFirstDayOfWeek(startOfWeek);
-        const endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(startOfWeek.getDate() + 7);
-        setLastDayOfWeek(endOfWeek);
-
-        const resJournalEntries = await axios.get('https://www.dreamoracles.co/api/dream/user/' + user?.email);
-        
-        const filteredDreams = resJournalEntries.data.filter(dream => {
-          const dreamDate = new Date(dream.dreamDate);
-          return dreamDate >= startOfWeek && dreamDate < endOfWeek;
-        });
-
-        const sortedDreams = filteredDreams.sort((a, b) => {
-          return new Date(b.dreamDate).getTime() - new Date(a.dreamDate).getTime();
-        });
+      const resJournalEntries = await axios.get('https://www.dreamoracles.co/api/dream/user/' + user?.email);
       
-        setDreams(sortedDreams);
-      } catch (err) {
-        console.log("Error: ", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      const filteredDreams = resJournalEntries.data.filter(dream => {
+        const dreamDate = new Date(dream.dreamDate);
+        return dreamDate >= startOfWeek && dreamDate < endOfWeek;
+      });
 
-    retrieveJournaledDreams();
-  }, [user, weekOffset]);
+      const sortedDreams = filteredDreams.sort((a, b) => {
+        return new Date(b.dreamDate).getTime() - new Date(a.dreamDate).getTime();
+      });
+    
+      setDreams(sortedDreams);
+    } catch (err) {
+      console.log("Error: ", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // UseFocusEffect for refetching when the page comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      if (user) {
+        setLoading(true); // Set loading state true when refetching data
+        retrieveJournaledDreams();
+      }
+    }, [user, weekOffset])
+  );
 
   // Animation logic
   const startAnimation = () => {
@@ -97,10 +103,6 @@ const ViewJournal = ({ navigation }) => {
     }
   }, [loading]);
 
-  const handleBackButton = () => {
-    navigation.navigate("JournalDream");
-  };
-
   const handleDreamPress = (dreamID) => {
     navigation.navigate("ViewDream", { dreamID });
   };
@@ -128,20 +130,7 @@ const ViewJournal = ({ navigation }) => {
 
   if (loading) {
     return (
-      <ImageBackground
-          source={require('../assets/images/BackgroundStarsCropped.png')}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-      >
-      <SafeAreaView style={globalStyles.loadingContainer}>
-        <Text style={styles.loadingText}>Preparing Your Dream Journal</Text>
-        <View style={globalStyles.dotsContainer}>
-          <Animated.View style={[globalStyles.dot, { opacity: dot1Opacity }]} />
-          <Animated.View style={[globalStyles.dot, { opacity: dot2Opacity }]} />
-          <Animated.View style={[globalStyles.dot, { opacity: dot3Opacity }]} />
-        </View>
-      </SafeAreaView>
-      </ImageBackground>
+      <Loading loadingText={'Preparing Your Dream Journal'} />
     );
   }
 
@@ -184,6 +173,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     marginBottom: 20,
+    textAlign: 'center'
   },
   buttonStyleViewJournal: {
     backgroundColor: '#00FFFF',

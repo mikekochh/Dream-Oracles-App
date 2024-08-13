@@ -11,7 +11,13 @@ import ViewDream from './screens/ViewDream';
 import ViewJournal from './screens/ViewJournal';
 import HomeScreen from './screens/Home';
 import Settings from './screens/Settings';
-import SleepScreen from './screens/Sleep';
+import SleepSounds from './screens/SleepSounds';
+
+// Import new screens
+import Meditation from './screens/Meditation';
+import BreathWork from './screens/BreathWork';
+import Frequencies from './screens/Frequencies';
+import BedtimeStories from './screens/BedtimeStories';
 
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
 import DismissKeyboard from './components/DismissKeyboard';
@@ -71,7 +77,7 @@ function ViewJournalStack() {
       }}
     >
       <Stack.Screen
-        name="ViewJournalMain" // Use a unique name here
+        name="ViewJournalMain"
         component={ViewJournal}
         options={{ headerShown: false }}
       />
@@ -84,10 +90,46 @@ function ViewJournalStack() {
   );
 }
 
+function SleepSoundsStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: '#000020' },
+      }}
+    >
+      <Stack.Screen
+        name="SleepSounds"
+        component={SleepSounds}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Meditation"
+        component={Meditation}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BreathWork"
+        component={BreathWork}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Frequencies"
+        component={Frequencies}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BedtimeStories"
+        component={BedtimeStories}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function AppTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"  // Set the initial route to Home
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconSource;
@@ -95,13 +137,13 @@ function AppTabs() {
             case 'Journal':
               iconSource = writeLogo;
               break;
-            case 'ViewJournalTab': // Update this to match the new name
+            case 'ViewJournalTab':
               iconSource = journalLogo;
               break;
             case 'Home':
               iconSource = homeLogo;
               break;
-            case 'Sleep':
+            case 'SleepSoundsTab':
               iconSource = sleepLogo;
               break;
             case 'Settings':
@@ -142,7 +184,7 @@ function AppTabs() {
         options={{ title: 'Journal New Dream' }}
       />
       <Tab.Screen
-        name="ViewJournalTab" // Use a different name here
+        name="ViewJournalTab"
         component={ViewJournalStack}
         options={{ title: 'View Dream Journal' }}
       />
@@ -152,9 +194,9 @@ function AppTabs() {
         options={{ title: 'Home Page' }}
       />
       <Tab.Screen
-        name="Sleep"
-        component={SleepScreen}
-        options={{ title: 'Sleep' }}
+        name="SleepSoundsTab"
+        component={SleepSoundsStack} // Updated to use SleepSoundsStack
+        options={{ title: 'Sleep Sounds' }}
       />
       <Tab.Screen
         name="Settings"
@@ -206,8 +248,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 5, // Add some margin between icons
-    padding: 24, // Add padding for a consistent touch area
+    marginHorizontal: 5,
+    padding: 24,
   },
 });
 

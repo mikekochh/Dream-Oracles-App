@@ -128,11 +128,6 @@ const JournalDream = ({ navigation }) => {
 export default JournalDream;
 
 const styles = StyleSheet.create({
-  gradient: {
-    ...StyleSheet.absoluteFillObject, // Fills the entire screen
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   backgroundImage: {
     flex: 1,
     justifyContent: 'center', // Center content vertically

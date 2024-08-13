@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 export const globalStyles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: '#000020',
   },
   goldenRatioOne: {
@@ -98,6 +97,55 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  sleepSoundsContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignItems: 'center',
+    backgroundColor: '#1A1A36', // Lighter shade of #000020
+    borderRadius: 8,
+    overflow: 'hidden',
+    paddingRight: 1
+  },
+  sleepSoundsImage: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+    padding: 10,
+    // borderRadius: 8
+  },
+  sleepSoundsTextContainer: {
+    flex: 1,
+    padding: 10,
+  },
+  sleepSoundsName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 5,
+  },
+  sleepSoundsDescription: {
+    fontSize: 14,
+    color: 'lightgray',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
+  backButtonCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backButtonImage: {
+    width: 20,
+    height: 20,
+    tintColor: 'white',
   },
 });
 

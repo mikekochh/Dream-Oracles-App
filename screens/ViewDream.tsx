@@ -1,35 +1,33 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
   ImageBackground,
-  Animated
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
+import Text from '../components/Text';
+import Loading from '../components/Loading'; // Import the Loading component
 
 const ViewDream = ({ route, navigation }) => {
   const { user } = useContext(AuthContext) ?? {};
   const [dream, setDream] = useState(null);
+  const [dreamDate, setDreamDate] = useState<Date | null>(null);
   const { dreamID } = route.params;
-
-  const dot1Opacity = useRef(new Animated.Value(0)).current;
-  const dot2Opacity = useRef(new Animated.Value(0)).current;
-  const dot3Opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const fetchDream = async () => {
       try {
-        const res = await axios.get(`https://www.dreamoracles.co/api/dream/${dreamID}`);
-        console.log("res.data: ", res.data);
-        setDream(res.data);
+        const res = await axios.get(
+          `https://www.dreamoracles.co/api/dream/${dreamID}`
+        );
+        setDream(res.data.dream);
+        setDreamDate(res.data.dreamDate);
       } catch (err) {
-        console.log("Error fetching dream: ", err);
+        console.log('Error fetching dream: ', err);
       }
     };
 
@@ -41,22 +39,7 @@ const ViewDream = ({ route, navigation }) => {
   };
 
   if (!dream) {
-    return (
-      <ImageBackground
-          source={require('../assets/images/BackgroundStarsCropped.png')}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-      >
-      <SafeAreaView style={globalStyles.loadingContainer}>
-        <Text style={styles.loadingText}>Preparing Your Dream Journal</Text>
-        <View style={globalStyles.dotsContainer}>
-          <Animated.View style={[globalStyles.dot, { opacity: dot1Opacity }]} />
-          <Animated.View style={[globalStyles.dot, { opacity: dot2Opacity }]} />
-          <Animated.View style={[globalStyles.dot, { opacity: dot3Opacity }]} />
-        </View>
-      </SafeAreaView>
-      </ImageBackground>
-    );
+    return <Loading loadingText={'Preparing Your Dream'} />;
   }
 
   return (
@@ -66,16 +49,11 @@ const ViewDream = ({ route, navigation }) => {
       resizeMode="cover"
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ padding: 0 }}>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={handleBackButton}
-          >
-            <Text style={styles.buttonTextStyle}>Back</Text>
-          </TouchableOpacity>
-          <Text style={styles.title}>{user?.name}'s Dream</Text>
-          <Text style={styles.dreamText}>{dream}</Text>
-        </ScrollView>
+        <TouchableOpacity style={styles.buttonStyle} onPress={handleBackButton}>
+          <Text style={styles.buttonTextStyle}>Back</Text>
+        </TouchableOpacity>
+        <Text style={globalStyles.pageSmallTitle}>{new Date(dreamDate).toLocaleDateString()}</Text>
+        <Text style={styles.dreamText}>{dream}</Text>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -91,18 +69,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
   },
-  dreamDate: {
-    color: 'gray',
-    fontSize: 14,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
   dreamText: {
     color: 'white',
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 20,
-    padding: 20
+    padding: 20,
+    paddingTop: 0,
   },
   buttonStyle: {
     backgroundColor: '#00FFFF',
@@ -119,14 +92,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  loadingText: {
-    color: 'white',
-    fontSize: 18,
-    textAlign: 'center',
-    marginTop: 50,
-  },
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
+  },
+  trashIcon: {
+    position: 'absolute',
+    top: 30,
+    right: 5,
+  },
+  trashImage: {
+    width: 20,
+    height: 20,
   },
 });

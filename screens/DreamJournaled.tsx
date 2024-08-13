@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
   ImageBackground
 } from 'react-native';
+import Text from '../components/Text';
 
 const DreamJournaled = ({ navigation }) => {
 
