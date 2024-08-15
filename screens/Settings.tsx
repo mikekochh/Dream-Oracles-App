@@ -14,6 +14,10 @@ import Text from '../components/Text';
 const Settings = () => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
 
+  const handleFeedback = () => {
+    console.log("redirect user to feedback screen");
+  }
+
   return (
     <ImageBackground
       source={require('../assets/images/BackgroundStarsCropped.png')}
@@ -25,13 +29,18 @@ const Settings = () => {
         <View style={styles.contentContainer}>
           <View style={styles.section}>
             <Text style={[styles.sectionTitle, globalStyles.goldenRatioTwo]}>Profile Details</Text>
-            <Text style={[styles.sectionContent, globalStyles.goldenRatioOne]}>Name: John Doe</Text>
-            <Text style={[styles.sectionContent, globalStyles.goldenRatioOne]}>Email: johndoe@example.com</Text>
+            <Text style={[styles.sectionContent, globalStyles.goldenRatioOnePointFive]}>Name: John Doe</Text>
+            <Text style={[styles.sectionContent, globalStyles.goldenRatioOnePointFive]}>Email: johndoe@example.com</Text>
           </View>
 
           <View style={styles.logoutButtonContainer}>
             <TouchableOpacity onPress={handleLogout}>
               <Text style={[globalStyles.goldenRatioTwo, globalStyles.pageLink]}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.logoutButtonContainer}>
+            <TouchableOpacity onPress={handleLogout}>
+              <Text style={[globalStyles.goldenRatioTwo, globalStyles.pageLink]}>Leave us feedback</Text>
             </TouchableOpacity>
           </View>
         </View>

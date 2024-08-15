@@ -9,6 +9,9 @@ export const globalStyles = StyleSheet.create({
   goldenRatioOne: {
     fontSize: 12.36,
   },
+  goldenRatioOnePointFive: {
+    fontSize: 15,
+  },
   goldenRatioTwo: {
     fontSize: 20,
     color: '#F0F0F0',

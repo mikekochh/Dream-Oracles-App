@@ -44,7 +44,7 @@ const Meditation = () => {
             <Image source={require('../assets/images/backLink.png')} style={globalStyles.backButtonImage} />
           </View>
         </TouchableOpacity>
-        <Text style={globalStyles.pageSmallTitle}>Meditations</Text>
+        <Text style={[globalStyles.pageSmallTitle, { marginTop: 40 }]}>Meditations</Text>
         <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Meditations to help you sleep</Text>
         <FlatList
           data={meditations}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView, FlatList } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ImageBackground, SafeAreaView, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
@@ -10,21 +10,25 @@ const sleepOptions = [
     id: '1',
     title: 'Meditation',
     description: 'Use our sleep meditation tool to prime your brain for sleep.',
+    bannerPic: require('../assets/images/meditationsBanner.png'),
   },
   {
     id: '2',
     title: 'Breath Work',
     description: 'Do some breath work that emphasizes grounding, calmness, and promoting good sleep.',
+    bannerPic: require('../assets/images/breathWorkBanner.png'),
   },
   {
     id: '3',
     title: 'Frequencies',
     description: 'Play some sound wavelengths while you sleep to promote deeper sleep, uninterrupted sleep, or wavelengths that promote more vivid dreams.',
+    bannerPic: require('../assets/images/frequenciesBanner.png'),
   },
   {
     id: '4',
     title: 'Bedtime Stories',
     description: 'Tune out the brain chatter and revisit that relaxing childhood feeling of having a bedtime story read to you before going to sleep.',
+    bannerPic: require('../assets/images/bedtimeStoriesBanner.png'),
   },
 ];
 
@@ -52,9 +56,22 @@ const SleepSounds = () => {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity style={globalStyles.wideButton} onPress={() => handlePress(item.id)}>
-      <Text style={globalStyles.wideButtonTitle}>{item.title}</Text>
-      <Text style={styles.buttonDescription}>{item.description}</Text>
+      <View style={globalStyles.sleepSoundsContainer}>
+        <Image 
+          source={item.bannerPic} 
+          style={[globalStyles.sleepSoundsImage, { width: '100%', height: '100%', resizeMode: 'cover' }]} 
+        />
+        <View style={globalStyles.sleepSoundsTextContainer}>
+          <Text style={globalStyles.sleepSoundsName}>{item.title}</Text>
+          <Text style={globalStyles.sleepSoundsDescription}>{item.description}</Text>
+        </View>
+      </View>
     </TouchableOpacity>
+
+        // <TouchableOpacity style={globalStyles.wideButton} onPress={() => handlePress(item.id)}>
+    //   <Text style={globalStyles.wideButtonTitle}>{item.title}</Text>
+    //   <Text style={styles.buttonDescription}>{item.description}</Text>
+    // </TouchableOpacity>
   );
 
   return (
@@ -65,7 +82,6 @@ const SleepSounds = () => {
     >
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 20, justifyContent: 'flex-start' }}>
         <Text style={globalStyles.pageSmallTitle}>Sleep Sounds</Text>
-
         <FlatList
           data={sleepOptions}
           renderItem={renderItem}

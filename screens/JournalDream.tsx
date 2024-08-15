@@ -11,6 +11,7 @@ import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
+import { getFontFamily } from '../utils/fontFamily';
 
 const JournalDream = ({ navigation }) => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
@@ -81,6 +82,7 @@ const JournalDream = ({ navigation }) => {
                   fontSize: 20,
                   fontWeight: '200',
                   backgroundColor: '#000000',
+                  fontFamily: getFontFamily(false, 'normal')
                 }}
                 multiline
                 placeholder="Journal Dream Here"
