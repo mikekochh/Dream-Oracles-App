@@ -23,6 +23,7 @@ const BreathWork = () => {
       image={item.exerciseImage}
       title={item.exerciseName}
       description={item.exerciseDescription}
+      isModalScreen={true}
     />
   );
 

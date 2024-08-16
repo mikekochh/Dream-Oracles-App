@@ -29,6 +29,7 @@ const BedtimeStories = () => {
       image={item.storyImage}
       title={item.storyName}
       description={item.storyDescription}
+      isModalScreen={true}
     />
   );
 

@@ -47,7 +47,7 @@ const Login = () => {
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
                     <Image
                         source={require('../assets/images/logo.webp')}
-                        style={{ width: 150, height: 150 }} // Adjust width and height as needed
+                        style={{ width: 150, height: 150, borderRadius: 30 }} // Adjust width and height as needed
                         resizeMode="contain"
                     />
                 </View>
@@ -55,7 +55,7 @@ const Login = () => {
                 <View style={{ flex: 1, paddingHorizontal: 20 }}>
                     <View style={{ flex: 1, marginTop: 30 }}>
                         <Text style={{ color: '#8E8E8E', textAlign: 'center', fontSize: 24, marginBottom: 10, fontWeight: '200' }}>
-                            Welcome To Dream Oracles
+                            Welcome To Night Light
                         </Text>
                         {!loggingIn && (
                             <TextInput

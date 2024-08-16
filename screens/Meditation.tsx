@@ -33,6 +33,7 @@ const Meditation = () => {
       image={item.meditationImage}
       title={item.meditationName}
       description={item.meditationDescription}
+      isModalScreen={true}
     />
   );
 
