@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, SafeAreaView, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ImageBackground, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
 import SleepSoundsCard from '../components/SleepSoundsCard'; // Import the new component
+
+// Get the device width to calculate the correct height for 16:9 ratio
+const { width } = Dimensions.get('window');
+const imageHeight = (width / 16) * 9; // Calculate height for 16:9 ratio
 
 // Dummy data for meditations
 const meditations = [
@@ -44,7 +48,7 @@ const Meditation = () => {
             <Image source={require('../assets/images/backLink.png')} style={globalStyles.backButtonImage} />
           </View>
         </TouchableOpacity>
-        <Text style={[globalStyles.pageSmallTitle, { marginTop: 40 }]}>Meditations</Text>
+        <Text style={[globalStyles.pageSmallTitle, {marginTop: 50}]}>Meditations</Text>
         <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Meditations to help you sleep</Text>
         <FlatList
           data={meditations}

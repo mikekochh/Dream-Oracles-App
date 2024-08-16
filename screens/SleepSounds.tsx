@@ -10,27 +10,28 @@ const sleepOptions = [
     id: '1',
     title: 'Meditation',
     description: 'Use our sleep meditation tool to prime your brain for sleep.',
-    bannerPic: require('../assets/images/meditationsBanner.png'),
+    bannerPic: require('../assets/images/meditationsBanner.jpeg'),
   },
   {
     id: '2',
     title: 'Breath Work',
-    description: 'Do some breath work that emphasizes grounding, calmness, and promoting good sleep.',
-    bannerPic: require('../assets/images/breathWorkBanner.png'),
+    description: 'Breathing exercises that emphasizes grounding, calmness, and good sleep.',
+    bannerPic: require('../assets/images/breathWorkBanner.jpeg'),
   },
   {
     id: '3',
     title: 'Frequencies',
-    description: 'Play some sound wavelengths while you sleep to promote deeper sleep, uninterrupted sleep, or wavelengths that promote more vivid dreams.',
-    bannerPic: require('../assets/images/frequenciesBanner.png'),
+    description: 'Sounds you can play at night to promote restful sleep and stronger dreams.',
+    bannerPic: require('../assets/images/frequenciesBanner.jpeg'),
   },
   {
     id: '4',
     title: 'Bedtime Stories',
-    description: 'Tune out the brain chatter and revisit that relaxing childhood feeling of having a bedtime story read to you before going to sleep.',
-    bannerPic: require('../assets/images/bedtimeStoriesBanner.png'),
+    description: 'Revisit the soothing comfort of a bedtime story before sleep, tuning out the days chatter.',
+    bannerPic: require('../assets/images/bedtimeStoriesBanner.jpeg'),
   },
 ];
+
 
 const SleepSounds = () => {
   const navigation = useNavigation();
@@ -55,23 +56,16 @@ const SleepSounds = () => {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={globalStyles.wideButton} onPress={() => handlePress(item.id)}>
-      <View style={globalStyles.sleepSoundsContainer}>
+    <TouchableOpacity style={globalStyles.sleepSoundsContainer} onPress={() => handlePress(item.id)}>
         <Image 
           source={item.bannerPic} 
-          style={[globalStyles.sleepSoundsImage, { width: '100%', height: '100%', resizeMode: 'cover' }]} 
+          style={globalStyles.sleepSoundsImage} 
         />
         <View style={globalStyles.sleepSoundsTextContainer}>
           <Text style={globalStyles.sleepSoundsName}>{item.title}</Text>
           <Text style={globalStyles.sleepSoundsDescription}>{item.description}</Text>
         </View>
-      </View>
     </TouchableOpacity>
-
-        // <TouchableOpacity style={globalStyles.wideButton} onPress={() => handlePress(item.id)}>
-    //   <Text style={globalStyles.wideButtonTitle}>{item.title}</Text>
-    //   <Text style={styles.buttonDescription}>{item.description}</Text>
-    // </TouchableOpacity>
   );
 
   return (

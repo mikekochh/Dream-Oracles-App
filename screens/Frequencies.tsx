@@ -38,7 +38,7 @@ const Frequencies = () => {
             <Image source={require('../assets/images/backLink.png')} style={globalStyles.backButtonImage} />
           </View>
         </TouchableOpacity>
-        <Text style={globalStyles.pageSmallTitle}>Frequencies</Text>
+        <Text style={[globalStyles.pageSmallTitle, {marginTop: 50}]}>Frequencies</Text>
         <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Relax with sound frequencies</Text>
         <FlatList
           data={frequencyExercises}

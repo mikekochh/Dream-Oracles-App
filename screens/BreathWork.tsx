@@ -38,8 +38,8 @@ const BreathWork = () => {
             <Image source={require('../assets/images/backLink.png')} style={globalStyles.backButtonImage} />
           </View>
         </TouchableOpacity>
-        <Text style={globalStyles.pageSmallTitle}>Breath Work</Text>
-        <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Exercises to help you breathe better</Text>
+        <Text style={[globalStyles.pageSmallTitle, {marginTop: 50}]}>Breath Work</Text>
+        <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Breath exercises for sleep</Text>
         <FlatList
           data={breathWorkExercises}
           renderItem={renderItem}
@@ -50,5 +50,12 @@ const BreathWork = () => {
     </ImageBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  backButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default BreathWork;

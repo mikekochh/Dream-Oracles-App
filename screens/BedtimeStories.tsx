@@ -44,7 +44,7 @@ const BedtimeStories = () => {
             <Image source={require('../assets/images/backLink.png')} style={globalStyles.backButtonImage} />
           </View>
         </TouchableOpacity>
-        <Text style={globalStyles.pageSmallTitle}>Bedtime Stories</Text>
+        <Text style={[globalStyles.pageSmallTitle, {marginTop: 50}]}>Bedtime Stories</Text>
         <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Drift off to sleep with soothing tales</Text>
         <FlatList
           data={bedtimeStories}

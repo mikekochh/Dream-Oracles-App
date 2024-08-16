@@ -46,7 +46,7 @@ const Login = () => {
                 {/* Logo at the top */}
                 <View style={{ alignItems: 'center', marginTop: 20 }}>
                     <Image
-                        source={require('../assets/images/logo.png')}
+                        source={require('../assets/images/logo.webp')}
                         style={{ width: 150, height: 150 }} // Adjust width and height as needed
                         resizeMode="contain"
                     />

@@ -133,7 +133,7 @@ export const globalStyles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 20,
+    top: 40,
     left: 20,
     zIndex: 1,
   },
@@ -141,7 +141,7 @@ export const globalStyles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'black',
+    backgroundColor: '#1A1A36',
     justifyContent: 'center',
     alignItems: 'center',
   },
