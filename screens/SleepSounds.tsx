@@ -80,7 +80,7 @@ const SleepSounds = () => {
           data={sleepOptions}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          contentContainerStyle={{ padding: 10 }}
         />
       </SafeAreaView>
     </ImageBackground>
