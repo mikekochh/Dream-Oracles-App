@@ -19,6 +19,12 @@ const HomeScreen = () => {
   // Calculate progress for the circle (0 to 1 range)
   const progress = Math.min(dreamStreak / 30, 1);
 
+  const navigateToJournal = () => {
+    navigation.navigate('Journal', {
+      screen: 'JournalDream',
+    });
+  }
+
   return (
     <ImageBackground
       source={require('../assets/images/BackgroundStarsCropped.png')}
@@ -65,7 +71,7 @@ const HomeScreen = () => {
           <View style={{marginTop: 20}}>
             <TouchableOpacity
               style={globalStyles.button}
-              onPress={() => navigation.navigate('JournalDream')}
+              onPress={navigateToJournal}
             >
               <Text style={globalStyles.wideButtonTitle}>Journal New Dream</Text>
             </TouchableOpacity>

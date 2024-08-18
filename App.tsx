@@ -12,6 +12,7 @@ import ViewJournal from './screens/ViewJournal';
 import HomeScreen from './screens/Home';
 import Settings from './screens/Settings';
 import SleepSounds from './screens/SleepSounds';
+import AddInterpretations from './screens/AddInterpretations';
 
 // Import new screens
 import Meditation from './screens/Meditation';
@@ -28,6 +29,7 @@ import homeLogo from './assets/images/homeLogo.png';
 import journalLogo from './assets/images/journalLogo.png';
 import writeLogo from './assets/images/writeLogo.png';
 import sleepLogo from './assets/images/sleepLogo.png';
+import AddInterpretation from './screens/AddInterpretations';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,6 +65,11 @@ function JournalStack() {
       <Stack.Screen
         name="DreamJournaled"
         component={DreamJournaled}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddInterpretations"
+        component={AddInterpretations}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
