@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import Text from './Text';
 
-const InterpretationModal = ({ showModal, setShowModal }) => {
+const InterpretationModal = ({ showModal, setShowModal, selectedOracle }) => {
     return (
         <Modal
             transparent={true}
@@ -12,17 +13,14 @@ const InterpretationModal = ({ showModal, setShowModal }) => {
             <View style={styles.modalOverlay}>
                 <View style={styles.modalContent}>
                     <View style={styles.header}>
-                        <Text style={styles.title}>Interpret Dream</Text>
-                        <TouchableOpacity onPress={() => setShowModal(false)}>
-                            <Text style={styles.closeButton}>X</Text>
-                        </TouchableOpacity>
+                        <Text style={styles.title}>{selectedOracle?.oracleName} is interpreting your dream. We will notify you when your interpretation is complete</Text>
                     </View>
                     <View style={styles.body}>
                         <TouchableOpacity 
                             style={styles.actionButton}
-                            onPress={() => {/* Add interpret functionality here */}}
+                            onPress={() => setShowModal(false)}
                         >
-                            <Text style={styles.actionButtonText}>Start Interpretation</Text>
+                            <Text style={styles.actionButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -59,6 +57,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
+        textAlign: 'center'
     },
     closeButton: {
         fontSize: 18,

@@ -8,19 +8,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import OracleCard from '../components/OracleCard'; // Import OracleCard component
 import InterpretationModal from '../components/InterpretationModal'; // Import the InterpretationModal component
 
-const AddInterpretations = () => {
+const AddInterpretations = ({ route }) => {
+    const { dream } = route.params;
+    console.log("dream: ", dream);
     const [models, setModels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+    const [showModal, setShowModal] = useState(false);
+    const [selectedOracle, setSelectedOracle] = useState(null); // Track selected oracle
 
     useEffect(() => {
         const fetchModels = async () => {
             try {
                 const oraclesRes = await axios.get('https://www.dreamoracles.co/api/allOracles');
-                
-                // Filter the oracles based on the 'active' field
-                const activeOracles = oraclesRes.data.filter(oracle => oracle.active);
+
+                const activeOracles = oraclesRes.data.filter(oracle => oracle.appActive);
                 
                 // Set the filtered oracles to the models state
                 setModels(activeOracles);
@@ -33,6 +35,34 @@ const AddInterpretations = () => {
 
         fetchModels();
     }, []);
+
+    const handleOracleSelect = (oracle) => {
+        setSelectedOracle(oracle); // Set selected oracle
+    };
+
+    const startInterpretation = async () => {
+        try {
+            setShowModal(true);
+            const dreamPrompt = `${selectedOracle.prompt}\nHere is the dream:\n###\n${dream}`;
+            const resInterpret = await axios.get('https://us-central1-dream-oracles.cloudfunctions.net/dreamLookup', {
+                params: { dreamPrompt }
+            });
+
+            if (resInterpret.status !== 200) {
+                console.log("There was an error interpreting your dream");
+                return;
+            }
+
+            console.log("interpretation: ", resInterpret.data[0].message.content);
+
+            // const resUpdateDatabase = await axios.post('https://www.dreamoracles.co/api/dream/interpret', {
+
+            // })
+
+        } catch (error) {
+            
+        }
+    }
 
     if (loading) {
         return (
@@ -57,20 +87,29 @@ const AddInterpretations = () => {
             <SafeAreaView style={{ flex: 1 }}>
                 <Text style={globalStyles.pageSmallTitle}>Dream Oracles</Text>
                 <Text style={[globalStyles.pageText, { textAlign: 'center' }]}>Select A Dream Interpretation Model</Text>
-                <ScrollView contentContainerStyle={styles.cardContainer}>
+                <ScrollView contentContainerStyle={styles.cardContainer} style={{ flex: 1 }}>
                     {models.map((model, index) => (
-                        <OracleCard key={index} oracle={model} />
+                        <OracleCard 
+                            key={index} 
+                            oracle={model} 
+                            onSelect={handleOracleSelect} // Pass the handler to OracleCard
+                            isSelected={selectedOracle?.oracleName === model.oracleName} // Highlight selected oracle
+                        />
                     ))}
                 </ScrollView>
-                <TouchableOpacity 
-                    style={styles.buttonStyle}
-                    onPress={() => setShowModal(true)} // Open the modal on button press
-                >
-                    <Text style={styles.buttonTextStyle}>Interpret Dream</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                        style={[styles.buttonStyle, !selectedOracle && styles.disabledButtonStyle]} // Disable button if no oracle selected
+                        onPress={startInterpretation}
+                        disabled={!selectedOracle} // Disable button if no oracle selected
+                    >
+                        <Text style={styles.buttonTextStyle}>Interpret Dream</Text>
+                    </TouchableOpacity>
+                </View>
                 <InterpretationModal 
                     showModal={showModal} 
-                    setShowModal={setShowModal} // Close the modal
+                    setShowModal={setShowModal}
+                    selectedOracle={selectedOracle}
                 />
             </SafeAreaView>
         </ImageBackground>
@@ -82,17 +121,28 @@ export default AddInterpretations;
 const styles = StyleSheet.create({
     cardContainer: {
         flexDirection: 'row',
-        flexWrap: 'wrap', // Allows wrapping to the next row
-        justifyContent: 'space-between', // Space between the cards
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
         padding: 10,
     },
-    buttonStyle: {
-        backgroundColor: '#FFD700', // Golden color
-        paddingVertical: 15,
-        paddingHorizontal: 30,
-        borderRadius: 10,
-        margin: 20,
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 10,
+        left: 0,
+        right: 0,
         alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        paddingVertical: 1,
+        paddingHorizontal: 20,
+    },
+    buttonStyle: {
+        backgroundColor: '#FFD700',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+    },
+    disabledButtonStyle: {
+        backgroundColor: '#B0B0B0', // Change the button color to gray when disabled
     },
     buttonTextStyle: {
         color: 'black',

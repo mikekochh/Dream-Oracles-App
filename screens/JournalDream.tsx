@@ -12,6 +12,7 @@ import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
 import { getFontFamily } from '../utils/fontFamily';
+import DismissKeyboard from '../components/DismissKeyboard';
 
 const JournalDream = ({ navigation }) => {
   const { handleLogout, user } = useContext(AuthContext) ?? {};
@@ -43,7 +44,7 @@ const JournalDream = ({ navigation }) => {
       if (resJournal.status == 200) {
         setDream('');
         setSaving(false);
-        navigation.navigate('DreamJournaled');
+        navigation.navigate('DreamJournaled', { dream });
       } else {
         setError('There was an issue journaling dream');
         setSaving(false);
@@ -60,6 +61,7 @@ const JournalDream = ({ navigation }) => {
   };
 
   return (
+      <DismissKeyboard>
         <ImageBackground
           source={require('../assets/images/BackgroundStarsCropped.png')}
           style={styles.backgroundImage}
@@ -124,6 +126,7 @@ const JournalDream = ({ navigation }) => {
           </View>
         </SafeAreaView>
       </ImageBackground>
+    </DismissKeyboard>
   );
 };
 

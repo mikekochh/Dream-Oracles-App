@@ -232,11 +232,9 @@ function App(): React.JSX.Element {
   return (
     <AuthProvider>
       <StatusBar barStyle="light-content" backgroundColor="#171717" />
-      <DismissKeyboard>
-        <View style={styles.container}>
-          <RootNavigator />
-        </View>
-      </DismissKeyboard>
+      <View style={styles.container}>
+        <RootNavigator />
+      </View>
     </AuthProvider>
   );
 }

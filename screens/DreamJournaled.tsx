@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Text from '../components/Text';
 
-const DreamJournaled = ({ navigation }) => {
+const DreamJournaled = ({ navigation, route }) => {
+    const { dream } = route.params; // Access the dream parameter
 
     return (
     <ImageBackground
@@ -27,10 +28,9 @@ const DreamJournaled = ({ navigation }) => {
                     <Text style={styles.buttonTextStyle}>Journal Another Dream</Text>
                 </TouchableOpacity>
 
-                {/* Add the new button here */}
                 <TouchableOpacity
                     style={styles.goldenButtonStyle}
-                    onPress={() => navigation.navigate("AddInterpretations")}
+                    onPress={() => navigation.navigate("AddInterpretations", { dream })}
                 >
                     <Text style={styles.goldenButtonTextStyle}>Add An Interpretation</Text>
                 </TouchableOpacity>
