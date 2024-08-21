@@ -42,9 +42,11 @@ const JournalDream = ({ navigation }) => {
         }
       );
       if (resJournal.status == 200) {
+        console.log("resJournal: ", resJournal.data);
+        const dreamID = resJournal.data._id;
         setDream('');
         setSaving(false);
-        navigation.navigate('DreamJournaled', { dream });
+        navigation.navigate('DreamJournaled', { dream, dreamID });
       } else {
         setError('There was an issue journaling dream');
         setSaving(false);

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,14 +7,14 @@ import {
   ImageBackground,
 } from 'react-native';
 import axios from 'axios';
-import { AuthContext } from '../components/context/AuthProvider';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
 import Loading from '../components/Loading'; // Import the Loading component
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ViewDream = ({ route, navigation }) => {
-  const { user } = useContext(AuthContext) ?? {};
   const [dream, setDream] = useState(null);
+  const [dreamDetails, setDreamDetails] = useState();
   const [dreamDate, setDreamDate] = useState<Date | null>(null);
   const { dreamID } = route.params;
 
@@ -31,12 +31,41 @@ const ViewDream = ({ route, navigation }) => {
       }
     };
 
+    const getDreamDetails = async () => {
+      try {
+        const dreamDetailsRes = await axios.get('https://www.dreamoracles.co/api/dream/details/' + dreamID);
+        setDreamDetails(dreamDetailsRes.data.dreamDetails);
+        console.log("dream details: ", dreamDetailsRes.data.dreamDetails);
+      } catch (error) {
+        console.log("Error fetching dream details: ", error);
+      }
+    }
+
+
     fetchDream();
+    getDreamDetails();
   }, [dreamID]);
 
   const handleBackButton = () => {
     navigation.goBack();
   };
+
+  const renderText = (text) => {
+    return text.split('\n').map((line, index) => {
+      const isBold = line.startsWith('###');
+      const cleanedLine = isBold ? line.replace('###', '').trim() : line;
+      
+      return (
+        <View key={index}>
+          <Text style={isBold ? [styles.dreamText, styles.boldText] : styles.dreamText}>
+            {cleanedLine}
+          </Text>
+          {/* {isBold && <Text style={styles.lineBreak}>{'\n'}</Text>} */}
+        </View>
+      );
+    });
+  };
+  
 
   if (!dream) {
     return <Loading loadingText={'Preparing Your Dream'} />;
@@ -52,8 +81,16 @@ const ViewDream = ({ route, navigation }) => {
         <TouchableOpacity style={styles.buttonStyle} onPress={handleBackButton}>
           <Text style={styles.buttonTextStyle}>Back</Text>
         </TouchableOpacity>
-        <Text style={globalStyles.pageSmallTitle}>{new Date(dreamDate).toLocaleDateString()}</Text>
-        <Text style={styles.dreamText}>{dream}</Text>
+        <Text style={[globalStyles.pageSmallTitle, {marginBottom: 15}]}>{new Date(dreamDate).toLocaleDateString()}</Text>
+        <ScrollView>
+          
+          <Text style={[globalStyles.pageSmallTitle, { textAlign: 'left', paddingLeft: 20, marginTop: 0}]}>Dream</Text>
+          <Text style={styles.dreamText}>{dream}</Text>
+          <Text style={[globalStyles.pageSmallTitle, { textAlign: 'left', paddingLeft: 20, marginTop: 0}]}>Interpretation</Text>
+          {dreamDetails && (
+            <Text style={styles.dreamText}>{renderText(dreamDetails[0]?.interpretation)}</Text>
+          )}
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -104,5 +141,11 @@ const styles = StyleSheet.create({
   trashImage: {
     width: 20,
     height: 20,
+  },
+  boldText: {
+    fontWeight: 'bold'
+  },
+  lineBreak: {
+    marginBottom: 0, // Optional: Adjusts the spacing if needed
   },
 });

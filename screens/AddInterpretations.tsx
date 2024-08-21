@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import Text from '../components/Text';
 import axios from 'axios';
 import { globalStyles } from '../styles/globalStyles';
 import Loading from '../components/Loading';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import OracleCard from '../components/OracleCard'; // Import OracleCard component
-import InterpretationModal from '../components/InterpretationModal'; // Import the InterpretationModal component
+import OracleCard from '../components/OracleCard';
+import InterpretationModal from '../components/InterpretationModal';
+import { AuthContext } from '../components/context/AuthProvider';
 
-const AddInterpretations = ({ route }) => {
-    const { dream } = route.params;
+const AddInterpretations = ({ navigation, route }) => {
+    const { dream, dreamID } = route.params;
+    const { user } = useContext(AuthContext) ?? {};
     console.log("dream: ", dream);
     const [models, setModels] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,14 +55,23 @@ const AddInterpretations = ({ route }) => {
                 return;
             }
 
-            console.log("interpretation: ", resInterpret.data[0].message.content);
+            const resUpdateDatabase = await axios.post('https://www.dreamoracles.co/api/dream/interpret', {
+                dreamID,
+                interpretation: resInterpret.data[0].message.content,
+                oracleID: selectedOracle.oracleID,
+                user
+            });
 
-            // const resUpdateDatabase = await axios.post('https://www.dreamoracles.co/api/dream/interpret', {
-
-            // })
+            if (resUpdateDatabase.status !== 200) {
+                console.log("There was an error saving the interpretation...");
+                return;
+            }
+            else {
+                console.log("Interpretation saved successfully!");
+            }
 
         } catch (error) {
-            
+            console.log("There was an error interpreting the dream: ", error);
         }
     }
 
@@ -110,6 +121,7 @@ const AddInterpretations = ({ route }) => {
                     showModal={showModal} 
                     setShowModal={setShowModal}
                     selectedOracle={selectedOracle}
+                    navigation={navigation}
                 />
             </SafeAreaView>
         </ImageBackground>

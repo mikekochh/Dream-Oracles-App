@@ -2,13 +2,19 @@ import React from 'react';
 import { View, Modal, TouchableOpacity, StyleSheet } from 'react-native';
 import Text from './Text';
 
-const InterpretationModal = ({ showModal, setShowModal, selectedOracle }) => {
+const InterpretationModal = ({ showModal, setShowModal, selectedOracle, navigation }) => {
+
+    const handleClose = () => {
+        setShowModal(false);
+        navigation.navigate("JournalDream");
+    }
+
     return (
         <Modal
             transparent={true}
             visible={showModal}
             animationType="slide"
-            onRequestClose={() => setShowModal(false)} // Handles closing the modal when back button is pressed on Android
+            onRequestClose={() => setShowModal(false)}
         >
             <View style={styles.modalOverlay}>
                 <View style={styles.modalContent}>
@@ -18,7 +24,7 @@ const InterpretationModal = ({ showModal, setShowModal, selectedOracle }) => {
                     <View style={styles.body}>
                         <TouchableOpacity 
                             style={styles.actionButton}
-                            onPress={() => setShowModal(false)}
+                            onPress={handleClose}
                         >
                             <Text style={styles.actionButtonText}>Close</Text>
                         </TouchableOpacity>

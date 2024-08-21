@@ -9,7 +9,7 @@ import {
 import Text from '../components/Text';
 
 const DreamJournaled = ({ navigation, route }) => {
-    const { dream } = route.params; // Access the dream parameter
+    const { dream, dreamID } = route.params; // Access the dream parameter
 
     return (
     <ImageBackground
@@ -30,7 +30,7 @@ const DreamJournaled = ({ navigation, route }) => {
 
                 <TouchableOpacity
                     style={styles.goldenButtonStyle}
-                    onPress={() => navigation.navigate("AddInterpretations", { dream })}
+                    onPress={() => navigation.navigate("AddInterpretations", { dream, dreamID })}
                 >
                     <Text style={styles.goldenButtonTextStyle}>Add An Interpretation</Text>
                 </TouchableOpacity>
