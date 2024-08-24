@@ -150,6 +150,19 @@ export const globalStyles = StyleSheet.create({
     height: 20,
     tintColor: 'white',
   },
+  goldenButtonStyle: {
+    backgroundColor: '#FFD700',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    margin: 10
+  },
+  goldenButtonTextStyle: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+},
 });
 
 

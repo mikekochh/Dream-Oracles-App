@@ -7,6 +7,7 @@ import {
   ImageBackground
 } from 'react-native';
 import Text from '../components/Text';
+import { globalStyles } from '../styles/globalStyles';
 
 const DreamJournaled = ({ navigation, route }) => {
     const { dream, dreamID } = route.params; // Access the dream parameter
@@ -27,12 +28,11 @@ const DreamJournaled = ({ navigation, route }) => {
                 >
                     <Text style={styles.buttonTextStyle}>Journal Another Dream</Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
-                    style={styles.goldenButtonStyle}
+                    style={globalStyles.goldenButtonStyle}
                     onPress={() => navigation.navigate("AddInterpretations", { dream, dreamID })}
                 >
-                    <Text style={styles.goldenButtonTextStyle}>Add An Interpretation</Text>
+                    <Text style={globalStyles.goldenButtonTextStyle}>Add An Interpretation</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -55,19 +55,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       textAlign: 'center',
-    },
-    goldenButtonStyle: {
-        backgroundColor: '#FFD700', // Golden color
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 8,
-        margin: 10
-    },
-    goldenButtonTextStyle: {
-        color: 'black',
-        fontSize: 16,
-        fontWeight: 'bold',
-        textAlign: 'center',
     },
     backgroundImage: {
         flex: 1,

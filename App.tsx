@@ -29,7 +29,6 @@ import homeLogo from './assets/images/homeLogo.png';
 import journalLogo from './assets/images/journalLogo.png';
 import writeLogo from './assets/images/writeLogo.png';
 import sleepLogo from './assets/images/sleepLogo.png';
-import AddInterpretation from './screens/AddInterpretations';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -91,6 +90,11 @@ function ViewJournalStack() {
       <Stack.Screen
         name="ViewDream"
         component={ViewDream}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddInterpretations"
+        component={AddInterpretations}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

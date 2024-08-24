@@ -9,11 +9,15 @@ const oracleImages = {
     "/Cassandra.webp": require('../assets/images/Cassandra.webp'),
 };
 
-const OracleCard = ({ oracle, onSelect, isSelected }) => {
+const OracleCard = ({ oracle, onSelect, isSelected, openCardInfoModal }) => {
     const oracleImage = oracleImages[oracle.oraclePicture];
 
     const handlePress = () => {
         onSelect(oracle); // Notify parent component of selection
+    };
+
+    const handleLinkPress = () => {
+        openCardInfoModal(oracle);
     };
 
     return (
@@ -28,6 +32,9 @@ const OracleCard = ({ oracle, onSelect, isSelected }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.name}>{oracle.oracleName}</Text>
                     <Text style={styles.speciality}>{oracle.oracleSpecialty}</Text>
+                    <TouchableOpacity onPress={handleLinkPress}>
+                        <Text style={styles.link}>Who is {oracle.oracleShortName}?</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </TouchableOpacity>
@@ -87,5 +94,12 @@ const styles = StyleSheet.create({
         color: '#aaa',
         textAlign: 'center',
         marginBottom: 10,
+    },
+    link: {
+        fontSize: 14,
+        color: '#FFD700', // Gold color for the link
+        textDecorationLine: 'underline',
+        textAlign: 'center',
+        marginTop: 10,
     },
 });

@@ -33,6 +33,7 @@ const ViewDream = ({ route, navigation }) => {
 
     const getDreamDetails = async () => {
       try {
+        console.log("getDreamDetails running...");
         const dreamDetailsRes = await axios.get('https://www.dreamoracles.co/api/dream/details/' + dreamID);
         setDreamDetails(dreamDetailsRes.data.dreamDetails);
         console.log("dream details: ", dreamDetailsRes.data.dreamDetails);
@@ -40,7 +41,6 @@ const ViewDream = ({ route, navigation }) => {
         console.log("Error fetching dream details: ", error);
       }
     }
-
 
     fetchDream();
     getDreamDetails();
@@ -51,6 +51,10 @@ const ViewDream = ({ route, navigation }) => {
   };
 
   const renderText = (text) => {
+    if (!text) {
+      return null; // or you could return an empty string, or some other fallback UI
+    }
+  
     return text.split('\n').map((line, index) => {
       const isBold = line.startsWith('###');
       const cleanedLine = isBold ? line.replace('###', '').trim() : line;
@@ -60,12 +64,10 @@ const ViewDream = ({ route, navigation }) => {
           <Text style={isBold ? [styles.dreamText, styles.boldText] : styles.dreamText}>
             {cleanedLine}
           </Text>
-          {/* {isBold && <Text style={styles.lineBreak}>{'\n'}</Text>} */}
         </View>
       );
     });
-  };
-  
+  };  
 
   if (!dream) {
     return <Loading loadingText={'Preparing Your Dream'} />;
@@ -86,9 +88,18 @@ const ViewDream = ({ route, navigation }) => {
           
           <Text style={[globalStyles.pageSmallTitle, { textAlign: 'left', paddingLeft: 20, marginTop: 0}]}>Dream</Text>
           <Text style={styles.dreamText}>{dream}</Text>
-          <Text style={[globalStyles.pageSmallTitle, { textAlign: 'left', paddingLeft: 20, marginTop: 0}]}>Interpretation</Text>
-          {dreamDetails && (
-            <Text style={styles.dreamText}>{renderText(dreamDetails[0]?.interpretation)}</Text>
+          {dreamDetails?.length ? (
+            <View>
+              <Text style={[globalStyles.pageSmallTitle, { textAlign: 'left', paddingLeft: 20, marginTop: 0}]}>Interpretation</Text>
+              <Text style={styles.dreamText}>{renderText(dreamDetails[0]?.interpretation)}</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+                style={[globalStyles.goldenButtonStyle, { marginHorizontal: 30}]}
+                onPress={() => navigation.navigate("AddInterpretations", { dream, dreamID })}
+            >
+                <Text style={globalStyles.goldenButtonTextStyle}>Add An Interpretation</Text>
+            </TouchableOpacity>
           )}
         </ScrollView>
       </SafeAreaView>

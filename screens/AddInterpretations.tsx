@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OracleCard from '../components/OracleCard';
 import InterpretationModal from '../components/InterpretationModal';
+import OracleCardInfoModal from '../components/OracleCardInfoModal'; // Import the new OracleCardInfoModal component
 import { AuthContext } from '../components/context/AuthProvider';
 
 const AddInterpretations = ({ navigation, route }) => {
@@ -18,6 +19,7 @@ const AddInterpretations = ({ navigation, route }) => {
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [selectedOracle, setSelectedOracle] = useState(null); // Track selected oracle
+    const [openCardInfoModal, setOpenCardInfoModal] = useState(false);
 
     useEffect(() => {
         const fetchModels = async () => {
@@ -40,6 +42,16 @@ const AddInterpretations = ({ navigation, route }) => {
 
     const handleOracleSelect = (oracle) => {
         setSelectedOracle(oracle); // Set selected oracle
+    };
+
+    const handleOpenCardInfoModal = (oracle) => {
+        setSelectedOracle(oracle);
+        setOpenCardInfoModal(true);
+    };
+
+    const handleCloseCardInfoModal = () => {
+        console.log("handleCloseCardInfoModal running...");
+        setOpenCardInfoModal(false);
     };
 
     const startInterpretation = async () => {
@@ -105,6 +117,7 @@ const AddInterpretations = ({ navigation, route }) => {
                             oracle={model} 
                             onSelect={handleOracleSelect} // Pass the handler to OracleCard
                             isSelected={selectedOracle?.oracleName === model.oracleName} // Highlight selected oracle
+                            openCardInfoModal={handleOpenCardInfoModal} // Pass down the function to open the info modal
                         />
                     ))}
                 </ScrollView>
@@ -122,6 +135,11 @@ const AddInterpretations = ({ navigation, route }) => {
                     setShowModal={setShowModal}
                     selectedOracle={selectedOracle}
                     navigation={navigation}
+                />
+                <OracleCardInfoModal
+                    isVisible={openCardInfoModal}
+                    onClose={handleCloseCardInfoModal}
+                    oracle={selectedOracle}
                 />
             </SafeAreaView>
         </ImageBackground>
