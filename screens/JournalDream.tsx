@@ -9,13 +9,15 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import { AuthContext } from '../components/context/AuthProvider';
+import { DreamContext } from '../components/context/DreamProvider';
 import { globalStyles } from '../styles/globalStyles';
 import Text from '../components/Text';
 import { getFontFamily } from '../utils/fontFamily';
 import DismissKeyboard from '../components/DismissKeyboard';
 
 const JournalDream = ({ navigation }) => {
-  const { handleLogout, user } = useContext(AuthContext) ?? {};
+  const { user } = useContext(AuthContext) ?? {};
+  const { loadingInterpretation, startInterpretation } = useContext(DreamContext) ?? {};
   const [dream, setDream] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [saving, setSaving] = useState<boolean>(false);
@@ -44,6 +46,7 @@ const JournalDream = ({ navigation }) => {
       if (resJournal.status == 200) {
         console.log("resJournal: ", resJournal.data);
         const dreamID = resJournal.data._id;
+        startInterpretation(dreamID, dream, user);
         setDream('');
         setSaving(false);
         navigation.navigate('DreamJournaled', { dream, dreamID });

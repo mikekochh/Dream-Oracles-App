@@ -21,7 +21,7 @@ import Frequencies from './screens/Frequencies';
 import BedtimeStories from './screens/BedtimeStories';
 
 import { AuthProvider, AuthContext } from './components/context/AuthProvider';
-import DismissKeyboard from './components/DismissKeyboard';
+import { DreamProvider, DreamContext } from './components/context/DreamProvider';
 
 // Import your icons
 import settingsLogo from './assets/images/settingsLogo.png';
@@ -235,10 +235,12 @@ function RootNavigator() {
 function App(): React.JSX.Element {
   return (
     <AuthProvider>
-      <StatusBar barStyle="light-content" backgroundColor="#171717" />
-      <View style={styles.container}>
-        <RootNavigator />
-      </View>
+      <DreamProvider>
+        <StatusBar barStyle="light-content" backgroundColor="#171717" />
+        <View style={styles.container}>
+          <RootNavigator />
+        </View>
+      </DreamProvider>
     </AuthProvider>
   );
 }

@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     modalOverlay: {
         flex: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        justifyContent: 'center',
+        justifyContent: 'flex-end'
     },
     modalContainer: {
         width: width, // Make the modal take up the full screen width
         height: height * 0.8, // Increase the height to 80% of the screen height
         backgroundColor: '#1A1A36',
         borderRadius: 10,
-        padding: 20,
+        padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',

@@ -13,30 +13,34 @@ const DreamJournaled = ({ navigation, route }) => {
     const { dream, dreamID } = route.params; // Access the dream parameter
 
     return (
-    <ImageBackground
-        source={require('../assets/images/BackgroundStarsCropped.png')}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-    >
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: '#8E8E8E', textAlign: 'center', fontSize: 24, marginBottom: 10, fontWeight: '200' }}>Dream Has Been Journaled</Text>
-                
-                <TouchableOpacity
-                    style={styles.buttonStyle}
-                    onPress={() => navigation.navigate("JournalDream")}
-                >
-                    <Text style={styles.buttonTextStyle}>Journal Another Dream</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={globalStyles.goldenButtonStyle}
-                    onPress={() => navigation.navigate("AddInterpretations", { dream, dreamID })}
-                >
-                    <Text style={globalStyles.goldenButtonTextStyle}>Add An Interpretation</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    </ImageBackground>
+        <ImageBackground
+            source={require('../assets/images/BackgroundStarsCropped.png')}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+        >
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={{ alignItems: 'center', marginTop: 20 }}>
+                    <Text style={globalStyles.pageSmallTitle}>Dream Journaled</Text>
+                    <Text style={[globalStyles.pageText, { textAlign: 'center', marginTop: 0 }]}>
+                        Your dream has been journaled and is currently being interpreted
+                    </Text>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginBottom: 200 }}>
+                    <TouchableOpacity
+                        style={styles.buttonStyle}
+                        onPress={() => navigation.navigate("JournalDream")}
+                    >
+                        <Text style={styles.buttonTextStyle}>Journal Another Dream</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[globalStyles.goldenButtonStyle, { marginTop: 10 }]}
+                        onPress={() => navigation.navigate("ViewDream", { dreamID })}
+                    >
+                        <Text style={globalStyles.goldenButtonTextStyle}>View Interpretation</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        </ImageBackground>
     )
 }
 
